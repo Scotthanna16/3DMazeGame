@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "edu.wm.cs.cs301.ScottHanna"
-        minSdk 21
+        minSdk 32
         targetSdk 32
         versionCode 1
         versionName "1.0"

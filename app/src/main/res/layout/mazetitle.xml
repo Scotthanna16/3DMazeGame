@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    >
+
+    <Button
+        android:id="@+id/Explore"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="EXPLORE"
+        android:backgroundTint="@color/material_dynamic_neutral50"
+        />
+
+    <Button
+        android:id="@+id/revisit"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="91dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toRightOf="@id/Explore"
+        android:text="REVISIT"
+        android:backgroundTint="@color/material_dynamic_neutral50"/>
+</RelativeLayout>
