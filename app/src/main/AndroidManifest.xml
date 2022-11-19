@@ -23,6 +23,9 @@
         </activity>
         <activity android:name=".gui.LosingActivity"/>
         <activity android:name=".gui.WinningActivity"/>
+        <activity android:name=".gui.GeneratingActivity"/>
+        <activity android:name=".gui.PlayManuallyActivity"/>
+        <activity android:name=".gui.PlayAnimationActivity"/>
     </application>
 
 </manifest>

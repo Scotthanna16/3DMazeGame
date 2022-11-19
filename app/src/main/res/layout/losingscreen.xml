@@ -19,7 +19,7 @@
         android:layout_height="618dp"
         android:gravity="center"
         android:text="You Were Caught by the Minotaur"
-        android:textColor="#900"
+        android:textColor="@color/white"
         android:textSize="70sp" />
 
 
