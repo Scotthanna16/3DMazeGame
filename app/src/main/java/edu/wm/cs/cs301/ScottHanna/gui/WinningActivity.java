@@ -20,10 +20,16 @@ public class WinningActivity extends AppCompatActivity {
     TextView view;
     TextView view2;
     @Override
+    /**
+     * Responsible for button clicks, and sets screen views
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.winningscreen);
+        //If the path length is 0, then don't show the path length text because manual
+        //must have been played
         if(pathlength!=0){
             view=(TextView)findViewById(R.id.Pathlength);
             view2=(TextView)findViewById(R.id.EnergyConsumption);
@@ -33,11 +39,13 @@ public class WinningActivity extends AppCompatActivity {
             view2.setVisibility(View.VISIBLE);
         }
 
-
+        //Initializes back button
         backbutton=findViewById(R.id.backbutton);
+        //listens for click on back button
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //LogV and Toast for when back button is clicked
                 Toast.makeText(WinningActivity.this,"Back",Toast.LENGTH_LONG).show();
                 Log.v("Back","Back clicked");
                 changeActivity();
@@ -47,7 +55,7 @@ public class WinningActivity extends AppCompatActivity {
     }
 
     /**
-     * Changes the activity from losing screen to title screen
+     * Changes the activity from winning screen to title screen
      */
     private void changeActivity(){
         Intent intent=new Intent(this, AMazeActivity.class);
