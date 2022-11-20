@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
 
     <Button
@@ -26,7 +28,7 @@
         android:layout_toRightOf="@id/ShowMap"
         android:backgroundTint="@color/material_dynamic_neutral60"
         android:text="Decrease"
-         />
+        />
 
     <Button
         android:id="@id/Solution"
@@ -125,6 +127,11 @@
         android:layout_marginLeft="150dp"
         android:layout_above="@id/ShowMap"
         />
+
+
+
+
+
 
 
 

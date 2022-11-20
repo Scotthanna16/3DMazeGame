@@ -48,5 +48,31 @@
 
         android:layout_marginBottom="80dp"
         android:layout_toRightOf="@id/Robot"
-        android:backgroundTint="@color/white" />
+        android:backgroundTint="@color/white"
+        />
+
+    <ProgressBar
+
+        android:id="@+id/ProgressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Driver"
+        android:layout_marginTop="80dp" />
+
+    <TextView
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Driver"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="85dp"
+
+        android:text="Loading Complete"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        />
 </RelativeLayout>

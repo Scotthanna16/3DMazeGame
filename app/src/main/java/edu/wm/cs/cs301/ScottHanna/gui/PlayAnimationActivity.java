@@ -2,8 +2,10 @@ package edu.wm.cs.cs301.ScottHanna.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -17,6 +19,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private Button Losingbutton;
     SeekBar seekbar;
     TextView view;
+
+    private ProgressBar pbar;
+    private TextView tv;
+    private int progressstatus;
+    private Handler handler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,12 +74,44 @@ public class PlayAnimationActivity extends AppCompatActivity {
             }
         });
 
+        pbar=(ProgressBar) findViewById(R.id.EnergyBar);
+        tv=(TextView) findViewById(R.id.Outofenergy);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(progressstatus<3500){
+                    progressstatus+=1;
+                    android.os.SystemClock.sleep(5);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            pbar.setProgress(progressstatus);
+
+                        }
+                    });
+
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv.setVisibility(View.VISIBLE);
+                        android.os.SystemClock.sleep(2000);
+                        changeActivitytolosing();
+
+                    }
+                });
+            }
+        }).start();
+
     }
     private void changeActivity(){
         Intent intent=new Intent(this, AMazeActivity.class);
         startActivity(intent);
     }
     private void changeActivitytowinning(){
+        WinningActivity.pathlength=50;
+        WinningActivity.energyconsumption=50;
+
         Intent intent=new Intent(this, WinningActivity.class);
         startActivity(intent);
     }
