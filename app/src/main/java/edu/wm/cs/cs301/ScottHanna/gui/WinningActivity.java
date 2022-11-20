@@ -2,9 +2,11 @@ package edu.wm.cs.cs301.ScottHanna.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +38,8 @@ public class WinningActivity extends AppCompatActivity {
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(WinningActivity.this,"Back",Toast.LENGTH_LONG).show();
+                Log.v("Back","Back clicked");
                 changeActivity();
 
             }

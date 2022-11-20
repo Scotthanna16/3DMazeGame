@@ -2,6 +2,7 @@ package edu.wm.cs.cs301.ScottHanna.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.AdapterView;
@@ -34,6 +35,8 @@ public class AMazeActivity extends AppCompatActivity{
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 view.setText("Rating"+String.valueOf(i));
+                Toast.makeText(AMazeActivity.this,String.valueOf(i),Toast.LENGTH_LONG).show();
+                Log.v("Seekbar_Changed","Seekbar value changed to"+String.valueOf(i));
             }
 
             @Override
@@ -58,11 +61,13 @@ public class AMazeActivity extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(AMazeActivity.this,Algorithms[i],Toast.LENGTH_LONG).show();
+                Log.v("Builder_selection","Builder changed to"+Algorithms[i]);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 Toast.makeText(AMazeActivity.this,Algorithms[0],Toast.LENGTH_LONG).show();
+                Log.v("Builder_selection","Builder is"+Algorithms[0]);
 
             }
         });
@@ -76,11 +81,13 @@ public class AMazeActivity extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(AMazeActivity.this,rooms[i],Toast.LENGTH_LONG).show();
+                Log.v("Rooms_selection","Rooms changed to"+rooms[i]);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 Toast.makeText(AMazeActivity.this,rooms[0],Toast.LENGTH_LONG).show();
+                Log.v("Rooms_selection","Rooms set to"+rooms[0]);
 
             }
         });
@@ -89,13 +96,18 @@ public class AMazeActivity extends AppCompatActivity{
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(AMazeActivity.this,"Explore",Toast.LENGTH_LONG).show();
+                Log.v("Explore","Explore clicked");
                 changeActivity();
+
 
             }
         });
         revisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(AMazeActivity.this,"Revisit",Toast.LENGTH_LONG).show();
+                Log.v("Revisit","Revisit clicked");
                 changeActivity();
 
             }

@@ -3,6 +3,7 @@ package edu.wm.cs.cs301.ScottHanna.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,6 +44,7 @@ public class GeneratingActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(GeneratingActivity.this,Driver[i],Toast.LENGTH_LONG).show();
+                Log.v("Driver_Selected","Driver Selected: "+Driver[i]);
                 if(Driver[i]=="Manual"){
                     drivermanual=true;
                 }
@@ -53,6 +55,8 @@ public class GeneratingActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(GeneratingActivity.this,Driver[0],Toast.LENGTH_LONG).show();
+                Log.v("Driver_Selected","Driver Selected: "+Driver[0]);
                 drivermanual=true;
 
 
@@ -69,11 +73,14 @@ public class GeneratingActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(GeneratingActivity.this,Reliability[i],Toast.LENGTH_LONG).show();
 
+                Log.v("Robot_Selected","Robot Selected: "+Reliability[i]);
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 Toast.makeText(GeneratingActivity.this,Reliability[0],Toast.LENGTH_LONG).show();
+                Log.v("Robot_Selected","Robot Selected: "+Reliability[0]);
 
             }
         });
@@ -114,6 +121,8 @@ public class GeneratingActivity extends AppCompatActivity {
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(GeneratingActivity.this,"Back",Toast.LENGTH_LONG).show();
+                Log.v("Back","Back clicked");
                 changeActivity();
 
             }
