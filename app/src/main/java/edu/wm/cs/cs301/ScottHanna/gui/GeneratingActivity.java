@@ -28,6 +28,8 @@ public class GeneratingActivity extends AppCompatActivity {
     private int progressstatus;
     private Handler handler=new Handler();
     private boolean drivermanual=false;
+
+
     @Override
     /**
      * Responsible for button clicks, progress bar, and spinner choices, sets screen views
@@ -36,6 +38,11 @@ public class GeneratingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generatingscreen);
+
+        Bundle extras=getIntent().getExtras();
+        String rooms=extras.getString("Rooms");
+        String Alg=extras.getString("Algorithm");
+        String diff=extras.getString("Difficulty");
 
 
         //Initializes spinner for driver choice
@@ -47,6 +54,13 @@ public class GeneratingActivity extends AppCompatActivity {
         drvr.setAdapter(aa);
         //listens for change on driver spinner
         drvr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * Listen for change on driver spinner
+             * @param adapterView
+             * @param view
+             * @param i
+             * @param l
+             */
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast and LogV message when spinner changes
@@ -61,6 +75,11 @@ public class GeneratingActivity extends AppCompatActivity {
                 }
             }
 
+
+            /**
+             * When nothing is selected, auto choose manual
+             * @param adapterView
+             */
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 //Toast and LogV message when spinner doesn't change
@@ -80,6 +99,13 @@ public class GeneratingActivity extends AppCompatActivity {
         robot.setAdapter(a2);
         //listens for change on robot spinner
         robot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * Listen for change on robot spinner
+             * @param adapterView
+             * @param view
+             * @param i
+             * @param l
+             */
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast and LogV message when spinner changes
@@ -89,6 +115,10 @@ public class GeneratingActivity extends AppCompatActivity {
 
             }
 
+            /**
+             * When nothing is selected auto choose premium
+             * @param adapterView
+             */
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 //Toast and LogV message when spinner doesn't change
@@ -104,6 +134,9 @@ public class GeneratingActivity extends AppCompatActivity {
 
         //new thread to increment loading
         new Thread(new Runnable() {
+            /**
+             * Runs while loop that increments progress bar
+             */
             @Override
             public void run() {
                 while(progressstatus<100){
@@ -118,6 +151,9 @@ public class GeneratingActivity extends AppCompatActivity {
                     });
 
                 }
+                /**
+                 * Once progress bar at max, show text and switch screen
+                 */
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -139,6 +175,10 @@ public class GeneratingActivity extends AppCompatActivity {
         backbutton=findViewById(R.id.backbutton);
         //listens for click on back button
         backbutton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listens for click on back button
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 //Toast and LogV message when back button clicked

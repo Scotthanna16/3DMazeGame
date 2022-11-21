@@ -25,6 +25,10 @@ public class AMazeActivity extends AppCompatActivity{
     SeekBar seekbar;
     TextView view;
 
+    private String Chosenalg;
+    private String chosenrooms;
+    private String chosendiff;
+
     /**
      * Responsible for button clicks, seekbar adjustments, and spinner choices, sets screen views
      * @param savedInstanceState
@@ -39,13 +43,22 @@ public class AMazeActivity extends AppCompatActivity{
         view=(TextView)findViewById(R.id.rating);
         //Listens for seekbar change
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            /**
+             * Listens for change in seek bar
+             * @param seekBar
+             * @param i
+             * @param b
+             */
             @Override
+
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 //changes text to represent seekbar
                 view.setText("Rating"+String.valueOf(i));
                 //Toast and LogV message
                 Toast.makeText(AMazeActivity.this,String.valueOf(i),Toast.LENGTH_LONG).show();
                 Log.v("Seekbar_Changed","Seekbar value changed to"+String.valueOf(i));
+                chosendiff=String.valueOf(i);
             }
 
             @Override
@@ -71,18 +84,28 @@ public class AMazeActivity extends AppCompatActivity{
         alg.setAdapter(aa);
         //listens for change in alg spinner
         alg.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            /**
+             * Listens for change in builder algorithms selection spinner
+             */
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast and LogV message when spinner changes
                 Toast.makeText(AMazeActivity.this,Algorithms[i],Toast.LENGTH_LONG).show();
                 Log.v("Builder_selection","Builder changed to"+Algorithms[i]);
+                Chosenalg=Algorithms[i];
             }
 
+
+            /**
+             * When nothing selected, choose DFS
+             */
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 //Toast and LogV message when spinner not changed
                 Toast.makeText(AMazeActivity.this,Algorithms[0],Toast.LENGTH_LONG).show();
                 Log.v("Builder_selection","Builder is"+Algorithms[0]);
+                Chosenalg=Algorithms[0];
 
             }
         });
@@ -95,24 +118,36 @@ public class AMazeActivity extends AppCompatActivity{
         roomyn.setAdapter(a2);
         //listens for change in alg spinner
         roomyn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            /**
+             * Listens for change in rooms selection spinner
+             */
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast and LogV message when spinner changes
                 Toast.makeText(AMazeActivity.this,rooms[i],Toast.LENGTH_LONG).show();
                 Log.v("Rooms_selection","Rooms changed to"+rooms[i]);
+                chosenrooms=rooms[i];
             }
 
+            /**
+             * When nothing selected make rooms auto
+             */
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 //Toast and LogV message when spinner not changed
                 Toast.makeText(AMazeActivity.this,rooms[0],Toast.LENGTH_LONG).show();
                 Log.v("Rooms_selection","Rooms set to"+rooms[0]);
+                chosenrooms=rooms[0];
 
             }
         });
 
-        //Listens for click on explore button
+
         explore.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listens for click on explore button
+             */
 
             @Override
             public void onClick(View view) {
@@ -124,9 +159,12 @@ public class AMazeActivity extends AppCompatActivity{
 
             }
         });
-        //Listens for click on revisit button
+
         revisit.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on revisit button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button clicked
                 Toast.makeText(AMazeActivity.this,"Revisit",Toast.LENGTH_LONG).show();
@@ -145,6 +183,9 @@ public class AMazeActivity extends AppCompatActivity{
      */
     private void changeActivity(){
         Intent intent=new Intent(this, GeneratingActivity.class);
+        intent.putExtra("Algorithm",Chosenalg);
+        intent.putExtra("Rooms",chosenrooms);
+        intent.putExtra("Difficulty",chosendiff);
         startActivity(intent);
     }
 

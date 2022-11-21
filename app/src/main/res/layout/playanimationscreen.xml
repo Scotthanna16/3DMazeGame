@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2"
+    >
+
     <Button
         android:id="@+id/Increase"
         android:layout_above="@+id/Decrease"
@@ -137,52 +140,7 @@
         android:progress="50"
         android:thumbTint="@color/black"/>
 
-    <TextView
-        android:id="@+id/Forward"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_below="@id/Seekbarid"
 
-        android:text="F"
-        android:textColor="#900"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/Backward"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_above="@id/Winning"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#090"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/Left"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_above="@id/Winning"
-        android:layout_marginBottom="170dp"
-        android:gravity="left"
-
-        android:text="L"
-
-        android:textColor="#900"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/Right"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_above="@id/Winning"
-        android:layout_marginBottom="170dp"
-        android:gravity="right"
-
-        android:text="R"
-        android:textColor="#090"
-        android:textSize="40sp" />
 
     <ProgressBar
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -207,5 +165,64 @@
         android:textSize="30dp"
         android:visibility="invisible"
         />
+
+    <edu.wm.cs.cs301.ScottHanna.gui.MazePanel2
+        android:id="@+id/mazePanel3"
+        android:layout_width="339dp"
+        android:layout_height="339dp"
+        android:layout_below="@id/backbutton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp" />
+
+    <TextView
+        android:id="@+id/Forward"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/backbutton"
+        android:layout_marginTop="40dp"
+
+        android:gravity="center"
+        android:text="F"
+        android:textColor="#900"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/Backward"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/Winning"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="B"
+        android:textColor="#090"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/Left"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/Winning"
+        android:layout_marginBottom="190dp"
+        android:gravity="left"
+
+        android:text="L"
+
+        android:textColor="#900"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/Right"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/Winning"
+        android:layout_marginBottom="190dp"
+        android:gravity="right"
+
+        android:text="R"
+        android:textColor="#090"
+        android:textSize="40sp" />
 
 </RelativeLayout>

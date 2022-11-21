@@ -15,8 +15,7 @@ import edu.wm.cs.cs301.ScottHanna.R;
 public class WinningActivity extends AppCompatActivity {
 
     private Button backbutton;
-    public static int pathlength=0;
-    public static int energyconsumption=0;
+
     TextView view;
     TextView view2;
     @Override
@@ -28,18 +27,23 @@ public class WinningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.winningscreen);
+
+        //Gets path length and energy consumption for play classes
+        Bundle extras=getIntent().getExtras();
+        String pathlength=extras.getString("Pathlength");
+        String energyconsumption= extras.getString("EnergyConsumption");
         //If the path length is 0, then don't show the path length text because manual
         //must have been played
-        if(pathlength!=0){
+        if(Integer.valueOf(pathlength)!=0){
             view=(TextView)findViewById(R.id.Pathlength);
-            view.setText("Path Length:"+String.valueOf(pathlength));
+            view.setText("Path Length:"+pathlength);
             view.setVisibility(View.VISIBLE);
 
         }
-        if (energyconsumption!=0){
+        if (Integer.valueOf(energyconsumption)!=0){
             view2=(TextView)findViewById(R.id.EnergyConsumption);
 
-            view2.setText("Energy Consumption:"+String.valueOf(energyconsumption));
+            view2.setText("Energy Consumption:"+energyconsumption);
 
             view2.setVisibility(View.VISIBLE);
         }
@@ -49,6 +53,9 @@ public class WinningActivity extends AppCompatActivity {
         //listens for click on back button
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * listens for click on backbutton
+             */
             public void onClick(View view) {
                 //LogV and Toast for when back button is clicked
                 Toast.makeText(WinningActivity.this,"Back",Toast.LENGTH_LONG).show();

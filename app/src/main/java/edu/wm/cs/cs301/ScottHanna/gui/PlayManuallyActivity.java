@@ -42,6 +42,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         //Listens for click on Back Button
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on back Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Back",Toast.LENGTH_LONG).show();
@@ -58,7 +61,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         Winningbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast and LogV message when button is clicked
+                /**
+                 * Listens for click on Go2Winning Button
+                 */
                 Toast.makeText(PlayManuallyActivity.this,"Winning",Toast.LENGTH_LONG).show();
                 Log.v("Winning","Changed to Winning");
                 changeActivitytowinning();
@@ -71,7 +76,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast and LogV message when button is clicked
+                /**
+                 * Listens for click on zoom in Button
+                 */
                 Toast.makeText(PlayManuallyActivity.this,"Zoomed in",Toast.LENGTH_LONG).show();
                 Log.v("Increase","View Zoomed in");
 
@@ -82,6 +89,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         //Listens for click on Zoom out Button
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on zoom out Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Zoomed out",Toast.LENGTH_LONG).show();
@@ -92,9 +102,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         //Initializes Show Maze button
         ShowMaze=findViewById(R.id.ShowMap);
-        //Listens for click on Show Maze Button
+
         ShowMaze.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on show maze Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Maze Shown",Toast.LENGTH_LONG).show();
@@ -104,9 +117,13 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
         //Initializes Show solution button
         ShowSolution=findViewById(R.id.Solution);
-        //Listens for click on Solution Button
+
         ShowSolution.setOnClickListener(new View.OnClickListener() {
             @Override
+
+            /**
+             * Listens for click on show solutions Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Solution Shown",Toast.LENGTH_LONG).show();
@@ -115,9 +132,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
         //Initializes Show walls button
         ShowWalls=findViewById(R.id.ShowWall);
-        //Listens for click on Show Wall Button
+
         ShowWalls.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on show walls Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Walls Shown",Toast.LENGTH_LONG).show();
@@ -126,9 +146,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
         //Initializes Forward button
         Forward=findViewById(R.id.Forward);
-        //Listens for click on Forward Button
+
         Forward.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on forward Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Forward",Toast.LENGTH_LONG).show();
@@ -138,9 +161,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
         //Initializes Right button
         Right=findViewById(R.id.Right);
-        //Listens for click on Right Button
         Right.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on Right Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Right",Toast.LENGTH_LONG).show();
@@ -150,9 +175,13 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         //Initializes Left button
         Left=findViewById(R.id.Left);
-        //Listens for click on left Button
+
         Left.setOnClickListener(new View.OnClickListener() {
             @Override
+
+            /**
+             * Listens for click on left Button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Left",Toast.LENGTH_LONG).show();
@@ -165,6 +194,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         //Listens for click on Jump Button
         Jump.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * listens for click on Jump button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Jump",Toast.LENGTH_LONG).show();
@@ -181,12 +213,15 @@ public class PlayManuallyActivity extends AppCompatActivity {
         Intent intent=new Intent(this, AMazeActivity.class);
         startActivity(intent);
     }
+
     /**
      * changes activity from play manually to winning
      */
     private void changeActivitytowinning(){
-        WinningActivity.pathlength=pathlength;
+
         Intent intent=new Intent(this, WinningActivity.class);
+        intent.putExtra("Pathlength",String.valueOf(pathlength));
+        intent.putExtra("EnergyConsumption",String.valueOf(0));
         startActivity(intent);
 
     }

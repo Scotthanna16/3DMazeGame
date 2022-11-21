@@ -26,9 +26,12 @@ public class LosingActivity extends AppCompatActivity {
         setContentView(R.layout.losingscreen);
         //initializes backbutton
         backbutton=findViewById(R.id.backbutton);
-        //listens for click on backbutton
+
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * listens for click on backbutton
+             */
             public void onClick(View view) {
                 //LogV and Toast for when back button is clicked
                 Toast.makeText(LosingActivity.this,"Back",Toast.LENGTH_LONG).show();

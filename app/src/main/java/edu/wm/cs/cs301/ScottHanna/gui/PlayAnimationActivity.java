@@ -240,10 +240,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
      */
     private void changeActivitytowinning(){
         //Hard code values for path length and energy consumption
-        WinningActivity.pathlength=50;
-        WinningActivity.energyconsumption=50;
+
 
         Intent intent=new Intent(this, WinningActivity.class);
+        intent.putExtra("Pathlength",String.valueOf(50));
+        intent.putExtra("EnergyConsumption",String.valueOf(50));
         startActivity(intent);
     }
     /**
