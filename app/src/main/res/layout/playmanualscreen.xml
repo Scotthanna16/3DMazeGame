@@ -130,11 +130,10 @@
         android:layout_above="@id/ShowMap"
         />
 
-
-
-
-
-
+    <edu.wm.cs.cs301.ScottHanna.gui.MazePanel
+        android:id="@+id/mazePanel3"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
 
 
 </RelativeLayout>
