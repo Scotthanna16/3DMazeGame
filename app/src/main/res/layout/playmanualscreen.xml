@@ -3,6 +3,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_2"
     >
 
 
@@ -132,8 +133,14 @@
 
     <edu.wm.cs.cs301.ScottHanna.gui.MazePanel
         android:id="@+id/mazePanel3"
-        android:layout_width="300dp"
-        android:layout_height="300dp" />
+        android:layout_width="339dp"
+        android:layout_height="339dp"
+        android:layout_below="@id/backbutton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp" />
 
 
 </RelativeLayout>

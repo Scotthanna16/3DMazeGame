@@ -19,53 +19,85 @@ public class MazePanel extends View {
     Canvas canvas;
 
 
-
-
+    /**
+     * Constructor for maze panel, draws shapes
+     * @param context
+     */
     public MazePanel(Context context) {
         super(context);
         init();
-        canvas.drawRect(0,0,500,500,paint);
+        canvas.drawRect(0,450,900,900,paint);
+        paint.setColor(Color.GRAY);
+        canvas.drawRect(0,0,900,450,paint);
+        paint.setColor(Color.RED);
+        canvas.drawOval(225,225,675,675,paint);
 
 
 
 
     }
-
+    /**
+     * onDraw used to actually draw thing
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
-
-        Log.v("Null testing", String.valueOf(bmap == null));
         canvas.drawBitmap(bmap,0,0,paint);
     }
 
 
-
+    /**
+     * Initializes objects
+     */
     public void init(){
-        bmap= Bitmap.createBitmap(500, 500, Bitmap.Config.RGB_565);
+        bmap= Bitmap.createBitmap(900, 900, Bitmap.Config.RGB_565);
         canvas=new Canvas(bmap);
         paint=new Paint();
         paint.setColor(Color.BLACK);
     }
-
+    /**
+     * Constructor for maze panel, draws shapes
+     * @param context
+     */
     public MazePanel(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
-        canvas.drawRect(0,0,500,500,paint);
+        canvas.drawRect(0,450,900,900,paint);
+        paint.setColor(Color.GRAY);
+        canvas.drawRect(0,0,900,450,paint);
+        paint.setColor(Color.RED);
+        canvas.drawOval(225,225,675,675,paint);
+
 
     }
-
+    /**
+     * Constructor for maze panel, draws shapes
+     * @param context
+     */
     public MazePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-        canvas.drawRect(0,0,500,500,paint);
+        canvas.drawRect(0,450,900,900,paint);
+        paint.setColor(Color.GRAY);
+        canvas.drawRect(0,0,900,450,paint);
+        paint.setColor(Color.RED);
+        canvas.drawOval(225,225,675,675,paint);
 
     }
-
+    /**
+     * Constructor for maze panel, draws shapes
+     * @param context
+     */
     public MazePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
-        canvas.drawRect(0,0,500,500,paint);
+        canvas.drawRect(0,450,900,900,paint);
+        paint.setColor(Color.GRAY);
+        canvas.drawRect(0,0,900,450,paint);
+        paint.setColor(Color.RED);
+        canvas.drawOval(225,225,675,675,paint);
+
 
     }
 

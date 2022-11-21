@@ -23,6 +23,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button Left;
     private Button Jump;
     private Button Right;
+    private int pathlength=0;
 
 
 
@@ -132,6 +133,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Forward",Toast.LENGTH_LONG).show();
                 Log.v("Forward","Robot moved forward");
+                pathlength++;
             }
         });
         //Initializes Right button
@@ -167,6 +169,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayManuallyActivity.this,"Jump",Toast.LENGTH_LONG).show();
                 Log.v("Jump","Robot Jumped");
+                pathlength++;
             }
         });
     }
@@ -182,8 +185,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * changes activity from play manually to winning
      */
     private void changeActivitytowinning(){
+        WinningActivity.pathlength=pathlength;
         Intent intent=new Intent(this, WinningActivity.class);
         startActivity(intent);
+
     }
 
 }

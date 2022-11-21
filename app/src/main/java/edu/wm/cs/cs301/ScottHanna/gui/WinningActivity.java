@@ -32,10 +32,15 @@ public class WinningActivity extends AppCompatActivity {
         //must have been played
         if(pathlength!=0){
             view=(TextView)findViewById(R.id.Pathlength);
-            view2=(TextView)findViewById(R.id.EnergyConsumption);
             view.setText("Path Length:"+String.valueOf(pathlength));
-            view2.setText("Energy Consumption:"+String.valueOf(energyconsumption));
             view.setVisibility(View.VISIBLE);
+
+        }
+        if (energyconsumption!=0){
+            view2=(TextView)findViewById(R.id.EnergyConsumption);
+
+            view2.setText("Energy Consumption:"+String.valueOf(energyconsumption));
+
             view2.setVisibility(View.VISIBLE);
         }
 
