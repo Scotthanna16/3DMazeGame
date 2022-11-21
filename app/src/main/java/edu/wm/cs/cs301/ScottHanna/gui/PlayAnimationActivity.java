@@ -44,9 +44,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         //Initializes Back Button
         backbutton=findViewById(R.id.backbutton);
-        //Listens for click on button
+
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on back button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Back",Toast.LENGTH_LONG).show();
@@ -57,8 +60,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
         //Initializes Zoom in Button
         increase=findViewById(R.id.Increase);
-        //Listens for click on button
+
         increase.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Listens for click on zoom in button
+             */
             @Override
 
             public void onClick(View view) {
@@ -70,8 +77,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
         //Initializes Zoom out Button
         decrease=findViewById(R.id.Decrease);
-        //Listens for click on button
+
         decrease.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listens for click on zoom out button
+             */
             @Override
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
@@ -82,8 +92,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
         //Initializes Start Button
         Start=findViewById(R.id.Start);
-        //Listens for click on button
+
         Start.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listens for click on Start button
+             */
             @Override
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
@@ -94,8 +107,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
         //Initializes Pause Button
         Pause=findViewById(R.id.Pause);
-        //Listens for click on button
+
         Pause.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Listens for click on Pause button
+             */
             @Override
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
@@ -106,9 +122,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         //Initializes Show Maze Button
         ShowMaze=findViewById(R.id.ShowMap);
-        //Listens for click on button
+
         ShowMaze.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on show maze button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Maze Shown",Toast.LENGTH_LONG).show();
@@ -118,9 +137,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
         //Initializes Show Solution Button
         ShowSolution=findViewById(R.id.Solution);
-        //Listens for click on button
+
         ShowSolution.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on show solution button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Solution Shown",Toast.LENGTH_LONG).show();
@@ -129,9 +151,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
         //Initializes Show Walls Button
         ShowWalls=findViewById(R.id.ShowWall);
-        //Listens for click on button
+
         ShowWalls.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on show walls button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Walls Shown",Toast.LENGTH_LONG).show();
@@ -140,9 +165,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
         //Initializes Go2Losing Button
         Losingbutton=findViewById(R.id.Losing);
-        //Listens for click on button
+
         Losingbutton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on go2losing button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Losing",Toast.LENGTH_LONG).show();
@@ -154,9 +182,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         //Initializes Go2Winning Button
         Winningbutton=findViewById(R.id.Winning);
-        //Listens for click on button
+
         Winningbutton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Listens for click on go2winning button
+             */
             public void onClick(View view) {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Winning",Toast.LENGTH_LONG).show();
@@ -172,6 +203,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         //listens for change in animation speed seek bar
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            /**
+             * listens for ange in animation speed seek bar
+             */
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 //LogV message and Toast when seekbar value changed
@@ -198,7 +233,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
         //runs progress bar
         new Thread(new Runnable() {
             @Override
-
+            /**
+             * Increments energy consumption progress bar
+             */
             public void run() {
                 //max energy consumption 3500
                 while(progressstatus<3500){
@@ -214,6 +251,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
                     });
 
                 }
+                /**
+                 * shows text when out of energy
+                 */
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
