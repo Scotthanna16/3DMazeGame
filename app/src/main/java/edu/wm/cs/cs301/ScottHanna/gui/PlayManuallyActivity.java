@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.wm.cs.cs301.ScottHanna.R;
+import edu.wm.cs.cs301.ScottHanna.generation.Maze;
 
 public class PlayManuallyActivity extends AppCompatActivity {
     private Button backbutton;
@@ -24,6 +26,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button Jump;
     private Button Right;
     private int pathlength=0;
+    public static Maze maze;
 
 
 

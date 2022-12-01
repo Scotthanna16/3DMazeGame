@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.wm.cs.cs301.ScottHanna.R;
+import edu.wm.cs.cs301.ScottHanna.generation.Maze;
 
 public class PlayAnimationActivity extends AppCompatActivity {
     private Button backbutton;
@@ -28,6 +29,8 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private Button Pause;
     SeekBar seekbar;
     TextView view;
+    public static Maze maze;
+
 
     private ProgressBar pbar;
     private TextView tv;

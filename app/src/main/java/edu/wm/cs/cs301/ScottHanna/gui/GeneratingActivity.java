@@ -247,6 +247,7 @@ public class GeneratingActivity extends AppCompatActivity {
 
     private void changeActivitytomanual(){
         Intent intent=new Intent(this, PlayManuallyActivity.class);
+        PlayManuallyActivity.maze=maze;
         startActivity(intent);
     }
 
@@ -255,6 +256,7 @@ public class GeneratingActivity extends AppCompatActivity {
      */
     private void changeActivitytoanimation(){
         Intent intent=new Intent(this, PlayAnimationActivity.class);
+        PlayAnimationActivity.maze=maze;
         startActivity(intent);
     }
 }

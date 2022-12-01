@@ -368,7 +368,7 @@ public class MazePanel extends View implements P7PanelF22{
     @Override
     public void addArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
         if(isOperational()==true){
-            paint.setStyle(Paint.Style.STROKE);
+            paint.setStyle(Paint.Style.FILL);
             canvas.drawArc((float)x, (float)y,(float)x+(float)width,(float)y+(float)height,(float)startAngle,(float)arcAngle,true,paint);
         }
 
