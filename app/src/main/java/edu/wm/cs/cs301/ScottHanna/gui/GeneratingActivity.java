@@ -13,10 +13,15 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Random;
+import edu.wm.cs.cs301.ScottHanna.generation.Maze;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.wm.cs.cs301.ScottHanna.R;
+import edu.wm.cs.cs301.ScottHanna.generation.DefaultOrder;
+import edu.wm.cs.cs301.ScottHanna.generation.MazeFactory;
+import edu.wm.cs.cs301.ScottHanna.generation.Order;
 
 public class GeneratingActivity extends AppCompatActivity {
     private Button backbutton;
@@ -25,9 +30,10 @@ public class GeneratingActivity extends AppCompatActivity {
 
     private ProgressBar pbar;
     private TextView tv;
-    private int progressstatus;
+    private int progressstatus=0;
     private Handler handler=new Handler();
     private boolean drivermanual=false;
+    private static Maze maze;
 
 
     @Override
@@ -139,9 +145,41 @@ public class GeneratingActivity extends AppCompatActivity {
              */
             @Override
             public void run() {
+                MazeFactory factory=new MazeFactory();
+                DefaultOrder order;
+                Random rand=new Random();
+                int seed= rand.nextInt(10000);
+                if(Alg.equals("DFS")){
+                    if(rooms.equals("Rooms")){
+                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.DFS,false,seed);
+                    }
+                    else{
+                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.DFS,true,seed);
+                    }
+                }
+                else if(Alg.equals("Prim")){
+                    if(rooms.equals("Rooms")){
+
+                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Prim,false,seed);
+                    }
+                    else{
+                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Prim,true,seed);
+                    }
+                }
+                else{
+                    if(rooms.equals("Rooms")){
+                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Boruvka,false,seed);
+                    }
+                    else{
+                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Boruvka,true,seed);
+                    }
+                }
+
+                factory.order(order);
+
                 while(progressstatus<100){
-                    progressstatus+=1;
-                    android.os.SystemClock.sleep(50);
+                    progressstatus=order.getProgress();
+                    android.os.SystemClock.sleep(100);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -151,6 +189,9 @@ public class GeneratingActivity extends AppCompatActivity {
                     });
 
                 }
+                maze=order.getMaze();
+
+
                 /**
                  * Once progress bar at max, show text and switch screen
                  */

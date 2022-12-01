@@ -27,7 +27,7 @@ public class AMazeActivity extends AppCompatActivity{
 
     private String Chosenalg;
     private String chosenrooms;
-    private String chosendiff;
+    private String chosendiff="0";
 
     /**
      * Responsible for button clicks, seekbar adjustments, and spinner choices, sets screen views

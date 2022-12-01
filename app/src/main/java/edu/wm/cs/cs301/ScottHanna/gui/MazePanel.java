@@ -29,7 +29,7 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context) {
         super(context);
         init();
-        addBackground(100);
+        addBackground(.5F);
         setColor(Color.RED);
         addFilledOval(0,0,100,100);
         setColor(Color.GREEN);
@@ -77,7 +77,7 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
-        addBackground(100);
+        addBackground(.5f);
         setColor(Color.RED);
         addFilledOval(0,0,100,100);
         setColor(Color.GREEN);
@@ -103,7 +103,7 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-        addBackground(100);
+        addBackground(.5f);
         setColor(Color.RED);
         addFilledOval(0,0,100,100);
         setColor(Color.GREEN);
@@ -129,7 +129,7 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
-        addBackground(100);
+        addBackground(.5f);
         setColor(Color.RED);
         addFilledOval(0,0,100,100);
         setColor(Color.GREEN);
@@ -201,9 +201,9 @@ public class MazePanel extends View implements P7PanelF22{
     @Override
     public void addBackground(float percentToExit) {
 
-        paint.setColor(blend(Color.valueOf(Color.LTGRAY),Color.valueOf(Color.GREEN),percentToExit));
+        paint.setColor(blend(Color.valueOf(Color.BLACK),ColorTheme.getColor(ColorTheme.MazeColors.TITLE_LARGE),percentToExit));
         canvas.drawRect(0,0,900,450,paint);
-        paint.setColor(blend(Color.valueOf(Color.BLACK),Color.valueOf(Color.YELLOW),percentToExit));
+        paint.setColor(blend(Color.valueOf(Color.GRAY),ColorTheme.getColor(ColorTheme.MazeColors.TITLE_SMALL),percentToExit));
         canvas.drawRect(0,450,900,900,paint);
 
     }
