@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -195,13 +196,18 @@ public class MazePanel2 extends View implements P7PanelF22{
 
 
     }
+
+
+
+
+
     /**
      * Commits all accumulated drawings to the UI.
      * Substitute for MazePanel.update method.
      */
     @Override
     public void commit() {
-        canvas.drawBitmap(bmap,0,0,paint);
+        invalidate();
 
     }
 
@@ -414,7 +420,7 @@ public class MazePanel2 extends View implements P7PanelF22{
     @Override
     public void addArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
         if(isOperational()==true){
-            paint.setStyle(Paint.Style.STROKE);
+            paint.setStyle(Paint.Style.FILL);
             canvas.drawArc((float)x, (float)y,(float)x+(float)width,(float)y+(float)height,(float)startAngle,(float)arcAngle,true,paint);
         }
 
@@ -430,6 +436,8 @@ public class MazePanel2 extends View implements P7PanelF22{
     public void addMarker(float x, float y, String str) {
         if(isOperational()==true) {
             paint.setStyle(Paint.Style.FILL);
+            paint.setTypeface(Typeface.SERIF);
+
             canvas.drawText(str, (float) x, (float) y, paint);
         }
     }
