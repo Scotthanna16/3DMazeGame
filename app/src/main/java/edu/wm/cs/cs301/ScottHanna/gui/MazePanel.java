@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -155,7 +156,7 @@ public class MazePanel extends View implements P7PanelF22{
      */
     @Override
     public void commit() {
-        canvas.drawBitmap(bmap,0,0,paint);
+        invalidate();
 
     }
 
@@ -384,6 +385,8 @@ public class MazePanel extends View implements P7PanelF22{
     public void addMarker(float x, float y, String str) {
         if(isOperational()==true) {
             paint.setStyle(Paint.Style.FILL);
+            paint.setTypeface(Typeface.SERIF);
+
             canvas.drawText(str, (float) x, (float) y, paint);
         }
     }
