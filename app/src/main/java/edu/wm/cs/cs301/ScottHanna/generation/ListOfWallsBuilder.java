@@ -71,8 +71,7 @@ public class ListOfWallsBuilder {
 	                y = cur[1];
 	                // create wall with (x,starty) being the actual start position of the wall, 
                     // y-starty being the positive length
-                    sl.add(new Wall(x*Constants.MAP_UNIT, starty*Constants.MAP_UNIT,
-                            0, (y-starty)*Constants.MAP_UNIT, dists.getDistanceValue(x, starty), colchange));
+                    sl.add(new Wall(x*Constants.MAP_UNIT, starty*Constants.MAP_UNIT, 0, (y-starty)*Constants.MAP_UNIT, dists.getDistanceValue(x, starty), colchange));
 	            }
 	            
 	            it = floorplan.iterator(x, 0, CardinalDirection.East);

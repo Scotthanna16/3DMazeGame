@@ -36,6 +36,7 @@ public class GeneratingActivity extends AppCompatActivity {
     private static Maze maze;
 
 
+
     @Override
     /**
      * Responsible for button clicks, progress bar, and spinner choices, sets screen views
