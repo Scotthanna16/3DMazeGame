@@ -34,6 +34,7 @@ public class MazePanel extends View implements P7PanelF22{
 
 
 
+
     }
     /**
      * onDraw used to actually draw thing

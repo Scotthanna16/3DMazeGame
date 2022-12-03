@@ -2,6 +2,7 @@ package edu.wm.cs.cs301.ScottHanna.gui;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +55,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.playmanualscreen);
-        panel=new MazePanel(this);
+
+        panel=findViewById(R.id.mazePanel3);
+
 
         // adjust internal state of maze model
         // init data structure for visible walls
@@ -387,7 +390,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Constants.VIEW_HEIGHT, Constants.MAP_UNIT,
                 Constants.STEP_SIZE, seenCells, maze.getRootnode()) ;
 
-        mapView = new Map(seenCells, 15, maze) ;
+        mapView = new Map(seenCells, 30, maze) ;
         // draw the initial screen for this state
         draw(cd.angle(), 0);
 

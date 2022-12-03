@@ -191,7 +191,7 @@ public class FirstPersonView {
         		drawRectCounter = drawRectLateCounter = drawRectWallCounter = 0;
         //
         drawAllVisibleSectors(bspRoot);
-		gc.commit();
+
 	}
 
 
