@@ -1,6 +1,6 @@
 package edu.wm.cs.cs301.ScottHanna.gui;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +18,7 @@ import edu.wm.cs.cs301.ScottHanna.generation.Maze;
 
 public class PlayManuallyActivity extends AppCompatActivity {
     private Button backbutton;
-    private Button Winningbutton;
+    //private Button Winningbutton;
     private Button increase;
     private Button decrease;
     private Button ShowMaze;
@@ -32,13 +32,14 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private int py=0;
     private int pathlength=0;
     public static Maze maze;
-    private MazePanel panel=new MazePanel(getBaseContext());
+
+    private MazePanel panel;
     CardinalDirection cd;
     private boolean showMaze=false;           // toggle switch to show overall maze on screen
     private boolean showSolution=false;       // toggle switch to show solution in overall maze on screen
     private boolean mapMode=false;
-    private Floorplan seenCells = new Floorplan(maze.getWidth()+1,maze.getHeight()+1) ;
-    private Map mapView = new Map(seenCells, 15, maze) ;
+    private Floorplan seenCells;
+    private Map mapView;
 
 
 
@@ -53,6 +54,20 @@ public class PlayManuallyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.playmanualscreen);
+        panel=new MazePanel(this);
+
+        // adjust internal state of maze model
+        // init data structure for visible walls
+        seenCells = new Floorplan(maze.getWidth()+1,maze.getHeight()+1) ;
+        // set the current position and direction consistently with the viewing direction
+        setPositionDirectionViewingDirection();
+
+        if (panel != null) {
+            startDrawer();
+
+        }
+
+
 
         //Initializes Back Button
         backbutton=findViewById(R.id.backbutton);
@@ -375,6 +390,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         mapView = new Map(seenCells, 15, maze) ;
         // draw the initial screen for this state
         draw(cd.angle(), 0);
+
     }
 
 
@@ -535,6 +551,16 @@ public class PlayManuallyActivity extends AppCompatActivity {
             cr.paintComponent(panel);
         }
         panel.commit();
+    }
+    /**
+     * Internal method to set the current position, the direction
+     * and the viewing direction to values consistent with the
+     * given maze.
+     */
+    private void setPositionDirectionViewingDirection() {
+        int[] start = maze.getStartingPosition() ;
+        setCurrentPosition(start[0],start[1]) ;
+        cd = CardinalDirection.East;
     }
 
 

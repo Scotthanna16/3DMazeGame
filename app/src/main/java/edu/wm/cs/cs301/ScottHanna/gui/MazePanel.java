@@ -22,7 +22,6 @@ public class MazePanel extends View implements P7PanelF22{
     Canvas canvas;
 
 
-
     /**
      * Constructor for maze panel
      * @param context
@@ -30,22 +29,7 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context) {
         super(context);
         init();
-        addBackground(.5F);
-        setColor(Color.RED);
-        addFilledOval(0,0,100,100);
-        setColor(Color.GREEN);
-        addFilledOval(100,0,100,100);
-        setColor(Color.YELLOW);
-        addFilledRectangle(0,200,200,100);
-        setColor(Color.BLUE);
-        int[]xPoints={400,500,550,760,800};
-        int[]yPoints={450,300,450,750,800};
-        addFilledPolygon(xPoints,yPoints,xPoints.length);
-        addLine(0,900,100,800);
-        setColor(Color.YELLOW);
-        addArc(500,200,200,100,30,100);
-        addMarker(350,550,"Hello World");
-        commit();
+
 
 
 
@@ -78,22 +62,6 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
-        addBackground(.5f);
-        setColor(Color.RED);
-        addFilledOval(0,0,100,100);
-        setColor(Color.GREEN);
-        addFilledOval(100,0,100,100);
-        setColor(Color.YELLOW);
-        addFilledRectangle(0,200,200,100);
-        setColor(Color.BLUE);
-        int[]xPoints={400,500,550,760,800};
-        int[]yPoints={450,300,450,750,800};
-        addFilledPolygon(xPoints,yPoints,xPoints.length);
-        addLine(0,900,100,800);
-        setColor(Color.YELLOW);
-        addArc(500,200,200,100,30,100);
-        addMarker(350,550,"Hello World");
-        commit();
 
 
     }
@@ -104,22 +72,6 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-        addBackground(.5f);
-        setColor(Color.RED);
-        addFilledOval(0,0,100,100);
-        setColor(Color.GREEN);
-        addFilledOval(100,0,100,100);
-        setColor(Color.YELLOW);
-        addFilledRectangle(0,200,200,100);
-        setColor(Color.BLUE);
-        int[]xPoints={400,500,550,760,800};
-        int[]yPoints={450,300,450,750,800};
-        addFilledPolygon(xPoints,yPoints,xPoints.length);
-        addLine(0,900,100,800);
-        setColor(Color.YELLOW);
-        addArc(500,200,200,100,30,100);
-        addMarker(350,550,"Hello World");
-        commit();
 
 
     }
@@ -130,22 +82,7 @@ public class MazePanel extends View implements P7PanelF22{
     public MazePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
-        addBackground(.5f);
-        setColor(Color.RED);
-        addFilledOval(0,0,100,100);
-        setColor(Color.GREEN);
-        addFilledOval(100,0,100,100);
-        setColor(Color.YELLOW);
-        addFilledRectangle(0,200,200,100);
-        setColor(Color.BLUE);
-        int[]xPoints={400,500,550,760,800};
-        int[]yPoints={450,300,450,750,800};
-        addFilledPolygon(xPoints,yPoints,xPoints.length);
-        addLine(0,900,100,800);
-        setColor(Color.YELLOW);
-        addArc(500,200,200,100,30,100);
-        addMarker(350,550,"Hello World");
-        commit();
+
 
 
 

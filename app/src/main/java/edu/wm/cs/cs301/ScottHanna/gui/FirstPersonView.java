@@ -172,6 +172,7 @@ public class FirstPersonView {
         //gc = (Graphics) g ;
 
         // update fields angle, viewx, viewy for current position and viewing angle
+		gc=panel;
         angle = ang ;
         setView(x, y, walkStep);
         

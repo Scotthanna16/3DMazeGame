@@ -17,6 +17,7 @@ import java.util.Random;
 import edu.wm.cs.cs301.ScottHanna.generation.Maze;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 
 import edu.wm.cs.cs301.ScottHanna.R;
 import edu.wm.cs.cs301.ScottHanna.generation.DefaultOrder;
@@ -34,6 +35,7 @@ public class GeneratingActivity extends AppCompatActivity {
     private Handler handler=new Handler();
     private boolean drivermanual=false;
     private static Maze maze;
+
 
 
 
@@ -87,6 +89,7 @@ public class GeneratingActivity extends AppCompatActivity {
              * When nothing is selected, auto choose manual
              * @param adapterView
              */
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 //Toast and LogV message when spinner doesn't change
