@@ -56,8 +56,8 @@ public class GeneratingActivity extends AppCompatActivity {
         setContentView(R.layout.generatingscreen);
 
         Bundle extras=getIntent().getExtras();
-        String rooms=extras.getString("Rooms");
-        String Alg=extras.getString("Algorithm");
+        final String[] rooms = {extras.getString("Rooms")};
+        final String[] Alg = {extras.getString("Algorithm")};
         int[] diff = {extras.getInt("Difficulty")};
         Boolean revisited=extras.getBoolean("revisitclicked");
 
@@ -163,23 +163,25 @@ public class GeneratingActivity extends AppCompatActivity {
                 if(revisited==false){
                     Random rand=new Random();
                     seed= rand.nextInt(10000);
-                    saveDataInSharedPreferences(seed,Integer.valueOf(diff[0]));
+                    saveDataInSharedPreferences(seed,Integer.valueOf(diff[0]), rooms[0], Alg[0]);
                 }
                 else{
                     seed=readDataFromSharedPreferencesseed();
                     diff[0] =readDataFromSharedPreferencessize();
+                    rooms[0] =readDataFromSharedPreferencesRooms();
+                    Alg[0] =readDataFromSharedPreferencesALG();
 
                 }
-                if(Alg.equals("DFS")){
-                    if(rooms.equals("Rooms")){
+                if(Alg[0].equals("DFS")){
+                    if(rooms[0].equals("Rooms")){
                         order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.DFS,false,seed);
                     }
                     else{
                         order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.DFS,true,seed);
                     }
                 }
-                else if(Alg.equals("Prim")){
-                    if(rooms.equals("Rooms")){
+                else if(Alg[0].equals("Prim")){
+                    if(rooms[0].equals("Rooms")){
 
                         order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.Prim,false,seed);
                     }
@@ -188,7 +190,7 @@ public class GeneratingActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    if(rooms.equals("Rooms")){
+                    if(rooms[0].equals("Rooms")){
                         order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.Boruvka,false,seed);
                     }
                     else{
@@ -254,11 +256,14 @@ public class GeneratingActivity extends AppCompatActivity {
 
     }
 
-    private void saveDataInSharedPreferences(int mazeseed, int size) {
+    private void saveDataInSharedPreferences(int mazeseed, int size, String perfect,String algor) {
         SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
         SharedPreferences.Editor myedit= sharedPreferences.edit();
         myedit.putInt("Seed",mazeseed);
         myedit.putInt("Size",size);
+        myedit.putString("Perfect",perfect);
+
+        myedit.putString("Algorithm",algor);
         myedit.commit();
     }
     private int readDataFromSharedPreferencesseed(){
@@ -272,6 +277,17 @@ public class GeneratingActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
         int mazesize=sharedPreferences.getInt("Size",rand.nextInt(10));
         return mazesize;
+    }
+    private String readDataFromSharedPreferencesALG(){
+        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String alg=sharedPreferences.getString("Algorithm","Prim");
+        return alg;
+
+    }
+    private String readDataFromSharedPreferencesRooms(){
+        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String rooms=sharedPreferences.getString("Perfect","rooms");
+        return rooms;
     }
 
     /**
