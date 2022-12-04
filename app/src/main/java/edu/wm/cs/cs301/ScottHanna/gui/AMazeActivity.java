@@ -27,7 +27,8 @@ public class AMazeActivity extends AppCompatActivity{
 
     private String Chosenalg;
     private String chosenrooms;
-    private String chosendiff="0";
+    private int chosendiff=0;
+    private boolean revisitclick;
 
     /**
      * Responsible for button clicks, seekbar adjustments, and spinner choices, sets screen views
@@ -37,6 +38,7 @@ public class AMazeActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        revisitclick=false;
         setContentView(R.layout.mazetitle);
         //initializing seekbar and textview
         seekbar= (SeekBar)findViewById(R.id.Seekbarid);
@@ -58,7 +60,7 @@ public class AMazeActivity extends AppCompatActivity{
                 //Toast and LogV message
                 Toast.makeText(AMazeActivity.this,String.valueOf(i),Toast.LENGTH_LONG).show();
                 Log.v("Seekbar_Changed","Seekbar value changed to"+String.valueOf(i));
-                chosendiff=String.valueOf(i);
+                chosendiff=i;
             }
 
             @Override
@@ -169,6 +171,7 @@ public class AMazeActivity extends AppCompatActivity{
                 //Toast and LogV message when button clicked
                 Toast.makeText(AMazeActivity.this,"Revisit",Toast.LENGTH_LONG).show();
                 Log.v("Revisit","Revisit clicked");
+                revisitclick=true;
                 changeActivity();
 
             }
@@ -186,6 +189,7 @@ public class AMazeActivity extends AppCompatActivity{
         intent.putExtra("Algorithm",Chosenalg);
         intent.putExtra("Rooms",chosenrooms);
         intent.putExtra("Difficulty",chosendiff);
+        intent.putExtra("revisitclicked",revisitclick);
         startActivity(intent);
     }
 

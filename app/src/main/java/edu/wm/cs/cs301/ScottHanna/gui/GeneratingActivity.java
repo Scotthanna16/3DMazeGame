@@ -13,9 +13,15 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Random;
-import edu.wm.cs.cs301.ScottHanna.generation.Maze;
 
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
+import edu.wm.cs.cs301.ScottHanna.generation.Maze;
+import android.content.SharedPreferences;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 
@@ -35,6 +41,7 @@ public class GeneratingActivity extends AppCompatActivity {
     private Handler handler=new Handler();
     private boolean drivermanual=false;
     private static Maze maze;
+    private SharedPreferences seed;
 
 
 
@@ -51,7 +58,8 @@ public class GeneratingActivity extends AppCompatActivity {
         Bundle extras=getIntent().getExtras();
         String rooms=extras.getString("Rooms");
         String Alg=extras.getString("Algorithm");
-        String diff=extras.getString("Difficulty");
+        int[] diff = {extras.getInt("Difficulty")};
+        Boolean revisited=extras.getBoolean("revisitclicked");
 
 
         //Initializes spinner for driver choice
@@ -151,31 +159,40 @@ public class GeneratingActivity extends AppCompatActivity {
             public void run() {
                 MazeFactory factory=new MazeFactory();
                 DefaultOrder order;
-                Random rand=new Random();
-                int seed= rand.nextInt(10000);
+                int seed;
+                if(revisited==false){
+                    Random rand=new Random();
+                    seed= rand.nextInt(10000);
+                    saveDataInSharedPreferences(seed,Integer.valueOf(diff[0]));
+                }
+                else{
+                    seed=readDataFromSharedPreferencesseed();
+                    diff[0] =readDataFromSharedPreferencessize();
+
+                }
                 if(Alg.equals("DFS")){
                     if(rooms.equals("Rooms")){
-                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.DFS,false,seed);
+                        order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.DFS,false,seed);
                     }
                     else{
-                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.DFS,true,seed);
+                        order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.DFS,true,seed);
                     }
                 }
                 else if(Alg.equals("Prim")){
                     if(rooms.equals("Rooms")){
 
-                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Prim,false,seed);
+                        order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.Prim,false,seed);
                     }
                     else{
-                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Prim,true,seed);
+                        order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.Prim,true,seed);
                     }
                 }
                 else{
                     if(rooms.equals("Rooms")){
-                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Boruvka,false,seed);
+                        order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.Boruvka,false,seed);
                     }
                     else{
-                        order=new DefaultOrder(Integer.valueOf(diff), Order.Builder.Boruvka,true,seed);
+                        order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.Boruvka,true,seed);
                     }
                 }
 
@@ -235,6 +252,26 @@ public class GeneratingActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void saveDataInSharedPreferences(int mazeseed, int size) {
+        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor myedit= sharedPreferences.edit();
+        myedit.putInt("Seed",mazeseed);
+        myedit.putInt("Size",size);
+        myedit.commit();
+    }
+    private int readDataFromSharedPreferencesseed(){
+        Random rand=new Random();
+        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        int mazeseed=sharedPreferences.getInt("Seed",rand.nextInt(10000));
+        return mazeseed;
+    }
+    private int readDataFromSharedPreferencessize(){
+        Random rand=new Random();
+        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        int mazesize=sharedPreferences.getInt("Size",rand.nextInt(10));
+        return mazesize;
     }
 
     /**
