@@ -227,10 +227,14 @@ public class FirstPersonView {
 	 * @param percentToExit gives the distance to exit
 	 */
 	private void drawBackground(MazePanel graphics, float percentToExit) {
+		/*
 		graphics.setColor(ColorTheme.getColor(MazeColors.BACKGROUND_TOP,percentToExit).toArgb());
 		graphics.addFilledRectangle(0, 0, viewWidth, viewHeight/2);
 		graphics.setColor(ColorTheme.getColor(MazeColors.BACKGROUND_BOTTOM,percentToExit).toArgb());
 		graphics.addFilledRectangle(0, viewHeight/2, viewWidth, viewHeight/2);
+		*/
+
+		graphics.addBackground(percentToExit);
 
 	}
 

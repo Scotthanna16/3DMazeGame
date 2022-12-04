@@ -337,7 +337,7 @@ public class ColorTheme {
 	
 	/////// set up for Singleton pattern //
 	private static ColorSettings instance;
-	private static ColorThemeSelection theme = ColorThemeSelection.DEFAULT; 
+	private static ColorThemeSelection theme = ColorThemeSelection.ADVANCED;
 	private static ColorSettings getColorSettings() {
 		if (instance == null) {
 			LOGGER.log(Level.CONFIG, "Using Color Theme: " + theme);
