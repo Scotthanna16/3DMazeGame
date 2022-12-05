@@ -10,6 +10,7 @@ import edu.wm.cs.cs301.ScottHanna.gui.ColorTheme.MazeColors;
 
 
 import java.util.logging.Logger;
+import android.util.Log;
 
 /**
  * This class encapsulates all functionality to draw a map of the overall maze,
@@ -524,6 +525,6 @@ public class Map {
 	 * @param str the string to be printed for debugging purposes
 	 */
 	private void dbg(String str) {
-		LOGGER.fine(str);
+		Log.v("Debug message",str);
 	}
 }

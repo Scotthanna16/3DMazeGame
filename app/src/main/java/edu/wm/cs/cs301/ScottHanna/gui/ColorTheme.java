@@ -4,6 +4,7 @@ package edu.wm.cs.cs301.ScottHanna.gui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import android.graphics.Color;
+import android.util.Log;
 
 /**
  * This class encapsulates the selection of colors for the game.
@@ -135,11 +136,11 @@ public class ColorTheme {
 	private static class ColorSettings {
 		Color getColor(MazeColors color, float percentToExit) {
 			Color result = (MazeColors.BACKGROUND_TOP == color)? Color.valueOf(Color.BLACK) : Color.valueOf(Color.DKGRAY);;
-			LOGGER.log(Level.FINEST, "given:" + color + ", returns color: " + result);
+			Log.v("Color settings", "given:" + color + ", returns color: " + result);
 			return result;
 		}
 		Color getWallColor(final int distance, final int cc, final int extensionX) {
-			LOGGER.log(Level.FINEST, "regardless of input, returns color: " + Color.valueOf(Color.LTGRAY));
+			Log.v("Color settings", "regardless of input, returns color: " + Color.valueOf(Color.LTGRAY));
 			return Color.valueOf(Color.LTGRAY);
 	    }
 		//////// shared code for subclasses, not used in this class ////////
@@ -218,7 +219,7 @@ public class ColorTheme {
 				result = Color.valueOf((float) RGB_DEF,(float) RGB_DEF,(float) RGB_DEF);
 	        	break;
 	        }
-	        LOGGER.log(Level.FINEST, "given distance:" + distance + ", returns color: " + result);
+	        Log.v("Wall color", "given distance:" + distance + ", returns color: " + result);
 	        return result;
 	    }
 	}
@@ -259,7 +260,7 @@ public class ColorTheme {
 			Color result = (MazeColors.BACKGROUND_TOP == color)? 
 					blend(yellowWM, goldWM, percentToExit) : 
 						blend(Color.valueOf(Color.LTGRAY), greenWM, percentToExit);
-			LOGGER.log(Level.FINEST, "given:" + color + ", returns color: " + result);
+			Log.v("Color of background", "given:" + color + ", returns color: " + result);
 	        return result;
 		}
 		/**
@@ -330,7 +331,7 @@ public class ColorTheme {
 	        	result = Color.valueOf((float) RGB_DEF,(float) RGB_DEF,(float) RGB_DEF);
 	        	break;
 	        }
-	        LOGGER.log(Level.FINEST, "given distance:" + distance + ", returns color: " + result);
+	        Log.v("Distance color", "given distance:" + distance + ", returns color: " + result);
 	        return result;
 	    }
 	}
@@ -340,7 +341,7 @@ public class ColorTheme {
 	private static ColorThemeSelection theme = ColorThemeSelection.ADVANCED;
 	private static ColorSettings getColorSettings() {
 		if (instance == null) {
-			LOGGER.log(Level.CONFIG, "Using Color Theme: " + theme);
+			Log.v("Color Theme", "Using Color Theme: " + theme);
 			switch (theme) {
 			case BASIC:
 				instance = new ColorSettingsBasic();

@@ -2,6 +2,7 @@ package edu.wm.cs.cs301.ScottHanna.generation;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import android.util.Log;
 
 
 /**
@@ -28,7 +29,7 @@ public class MazeBuilderPrim extends MazeBuilder implements Runnable {
 
 	public MazeBuilderPrim() {
 		super();
-		LOGGER.config("Using Prim's algorithm to generate maze.");
+		Log.v("Prim used","Using Prim's algorithm to generate maze.");
 	}
 
 	/**

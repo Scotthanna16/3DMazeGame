@@ -1,5 +1,7 @@
 package edu.wm.cs.cs301.ScottHanna.generation;
 
+import android.util.Log;
+
 import java.util.logging.Logger;
 
 import edu.wm.cs.cs301.ScottHanna.gui.Constants;
@@ -116,7 +118,7 @@ public class MazeBuilder implements Runnable {
 			// clean up internal data structures
 			// exception mechanism is basically used to exit method in a controlled way
 			// 
-			LOGGER.fine("Catching signal to stop") ;
+			Log.v("signal stop","Catching signal to stop") ;
 			// reset order and other fields for safe repeated operation and garbage collection
 			reset();
 		}

@@ -256,6 +256,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      */
     private void changeActivity(){
         Intent intent=new Intent(this, AMazeActivity.class);
+        Log.v("Change activity","Player has gone back to title");
         startActivity(intent);
     }
 
@@ -265,6 +266,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private void changeActivitytowinning(){
 
         Intent intent=new Intent(this, WinningActivity.class);
+        Log.v("Winning","Player has exited the maze");
         intent.putExtra("Pathlength",String.valueOf(pathlength));
         intent.putExtra("EnergyConsumption",String.valueOf(0));
         startActivity(intent);
@@ -303,7 +305,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 walk(1);
                 // check termination, did we leave the maze?
                 if (isOutside(px,py)) {
-                    // TODO: provide actual path length
+
                     changeActivitytowinning();
                 }
                 break;
@@ -382,6 +384,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private FirstPersonView firstPersonView;
     private CompassRose cr;
     protected void startDrawer() {
+        Log.v("Drawing started","Drawing of the screen has started");
         cr = new CompassRose();
         cr.setPositionAndSize(Constants.VIEW_WIDTH/2,
                 (int)(0.1*Constants.VIEW_HEIGHT),35);
@@ -404,7 +407,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     protected void printWarning() {
         if (printedWarning)
             return;
-        Log.v("Warning","No panel for drawing during executing, dry-run game without graphics!");
+        Log.e("Warning","No panel for drawing during executing, dry-run game without graphics!");
         printedWarning = true;
     }
     ////////////////////////////// set methods ///////////////////////////////////////////////////////////////
@@ -471,6 +474,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * @param dir for current direction, values are either 1 or -1
      */
     private synchronized void rotate(int dir) {
+        Log.v("Rotate","Player is rotating");
         final int originalAngle = cd.angle();//angle;
         final int steps = 4;
         int angle = originalAngle; // just in case for loop is skipped
@@ -496,6 +500,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * @param dir, only possible values are 1 (forward) and -1 (backward)
      */
     private synchronized void walk(int dir) {
+        Log.v("Rotate","Player is walking");
         // check if there is a wall in the way
         if (!wayIsClear(dir))
             return;
@@ -532,6 +537,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * otherwise it is a compass rose.
      */
     private void drawHintIfNecessary() {
+        Log.v("Drawing hint","Drawing hint");
         if (isInMapMode())
             return; // no need for help
         // in testing environments, there is sometimes no panel to draw on

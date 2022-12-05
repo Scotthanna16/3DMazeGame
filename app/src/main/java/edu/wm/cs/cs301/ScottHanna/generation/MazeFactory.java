@@ -1,6 +1,7 @@
 package edu.wm.cs.cs301.ScottHanna.generation;
 
 import java.util.logging.Logger;
+import android.util.Log;
 
 /**
  * This class encapsulates how a maze is generated. 
@@ -38,7 +39,7 @@ public class MazeFactory implements Factory {
 		// check if factory is busy
 		if (null != buildThread && buildThread.isAlive()) {
 			// order is currently processed, don't queue, just refuse
-			LOGGER.warning("Refusing to take order, too busy with current order");
+			Log.w("two orders","Refusing to take order, too busy with current order");
 			return false;
 		}
 		// idle, so accept order
@@ -58,20 +59,20 @@ public class MazeFactory implements Factory {
 			buildOrder();
 			break;
 		default:
-			LOGGER.severe("Missing implementation for requested algorithm: " + order.getBuilder());
+			Log.w("Missing order","Missing implementation for requested algorithm: " + order.getBuilder());
 			return false;
 		}
 		return true ;
 	}
 	@Override
 	public void cancel() {
-		LOGGER.fine("Received call to cancel current order");
+		Log.v("Order canceled","Received call to cancel current order");
 		if (null != buildThread) {
 			buildThread.interrupt() ;
 			buildThread = null; // allow for next order to get through
 		}
 		else {
-			LOGGER.warning("Received call to cancel current order, but there is no thread to stop");
+			Log.w("No thread","Received call to cancel current order, but there is no thread to stop");
 		}
 		// clean up happens in interrupt handling in run method
 		builder = null;
@@ -82,12 +83,12 @@ public class MazeFactory implements Factory {
 		if (null != buildThread) {
 			try {
 				buildThread.join();
-			} catch (Exception e) { 
-				LOGGER.severe("Join synchronization with builder thread lead to an exception") ;
+			} catch (Exception e) {
+				Log.w("Error joining thread","Join synchronization with builder thread lead to an exception") ;
 			}
 		}
 		else {
-			LOGGER.warning("Received call to wait for thread to finish, but there is no thread to wait for");
+			Log.w("No Thread","Received call to wait for thread to finish, but there is no thread to wait for");
 		}
 		builder = null;
 		currentOrder = null;
@@ -99,7 +100,7 @@ public class MazeFactory implements Factory {
 	private void buildOrder() { 
 		if (null == builder)
 			return;
-		LOGGER.fine("Starting background thread to build the ordered maze") ;
+		Log.v("Background thread started","Starting background thread to build the ordered maze") ;
 		builder.buildOrder(currentOrder);
 		buildThread = new Thread(builder);
 		buildThread.start();

@@ -1,5 +1,7 @@
 package edu.wm.cs.cs301.ScottHanna.generation;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -428,7 +430,7 @@ public class Wall {
                     (dotStart == 0 && hasOppositeDirection(wall))) {
                 lcount++;
             } else {
-                LOGGER.fine("grade_partition problem: dot1 = "+dotStart+", dot2 = "+dotEnd);
+                Log.v("Grade calc","grade_partition problem: dot1 = "+dotStart+", dot2 = "+dotEnd);
             }
         }
         return Math.abs(lcount-rcount) + splits * 3;
@@ -555,7 +557,7 @@ public class Wall {
 			if (dotStart == 0)
 				setPartition(true);
 		} else {
-			LOGGER.fine("error xx 1 "+dotStart);
+			Log.v("error","error xx 1 "+dotStart);
 		}
 	}
 

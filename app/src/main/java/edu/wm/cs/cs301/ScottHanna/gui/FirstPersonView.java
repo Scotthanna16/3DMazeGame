@@ -12,6 +12,7 @@ import edu.wm.cs.cs301.ScottHanna.generation.BSPNode;
 import edu.wm.cs.cs301.ScottHanna.generation.Floorplan;
 import edu.wm.cs.cs301.ScottHanna.generation.Wall;
 import edu.wm.cs.cs301.ScottHanna.gui.ColorTheme.MazeColors;
+import android.util.Log;
 
 /**
  * This class encapsulates all functionality for drawing the current view 
@@ -567,7 +568,7 @@ public class FirstPersonView {
 	 * @param str is the message
 	 */
 	private void dbg(String str) {
-		LOGGER.fine(str);
+		Log.v("debug message",str);
 	}
 
 	/**

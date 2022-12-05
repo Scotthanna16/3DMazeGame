@@ -190,6 +190,7 @@ public class AMazeActivity extends AppCompatActivity{
         intent.putExtra("Rooms",chosenrooms);
         intent.putExtra("Difficulty",chosendiff);
         intent.putExtra("revisitclicked",revisitclick);
+        Log.v("Change Activity","Changed from Title to generating");
         startActivity(intent);
     }
 

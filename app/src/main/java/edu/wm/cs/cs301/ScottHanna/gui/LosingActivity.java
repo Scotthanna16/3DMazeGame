@@ -47,6 +47,7 @@ public class LosingActivity extends AppCompatActivity {
      */
     private void changeActivity(){
         Intent intent=new Intent(this, AMazeActivity.class);
+        Log.v("Activity Changed","Activity changed to title");
         startActivity(intent);
     }
 }

@@ -94,6 +94,7 @@ public class MazePanel extends View implements P7PanelF22{
      */
     @Override
     public void commit() {
+        Log.v("Screen Change","UI told to change screen");
         invalidate();
 
     }
@@ -114,6 +115,7 @@ public class MazePanel extends View implements P7PanelF22{
      */
     @Override
     public void setColor(int argb) {
+
 
         paint.setColor(argb);
 
@@ -139,6 +141,7 @@ public class MazePanel extends View implements P7PanelF22{
 
     @Override
     public void addBackground(float percentToExit) {
+        Log.v("Background drawn","Background is being drawn");
 
         paint.setColor(blend(Color.valueOf(Color.BLACK),ColorTheme.getColor(ColorTheme.MazeColors.TITLE_LARGE),percentToExit));
         canvas.drawRect(0,0,900,450,paint);
@@ -177,6 +180,7 @@ public class MazePanel extends View implements P7PanelF22{
      */
     @Override
     public void addFilledRectangle(int x, int y, int width, int height) {
+
         //right corner is left corner + width, same idea for bottom
         if(isOperational()==true) {
             paint.setStyle(Paint.Style.FILL);

@@ -3,6 +3,7 @@ package edu.wm.cs.cs301.ScottHanna.generation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import android.util.Log;
 
 import edu.wm.cs.cs301.ScottHanna.gui.Constants;
 
@@ -178,7 +179,7 @@ public class BSPBuilder {
 			// this also means that 100 does not mean the generation is complete
 			int percentage = partiters*100/expectedPartiters ;
 			if (percentage > 100) {
-				LOGGER.warning("Progress estimate exceeds 100, set to 100 to mitigate issue");
+				Log.w("Progress > 100","Progress estimate exceeds 100, set to 100 to mitigate issue");
 				percentage = 100;
 			}
 			//  update progress bar

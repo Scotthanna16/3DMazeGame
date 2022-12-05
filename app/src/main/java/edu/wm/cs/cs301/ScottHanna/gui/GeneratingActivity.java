@@ -160,16 +160,20 @@ public class GeneratingActivity extends AppCompatActivity {
                 MazeFactory factory=new MazeFactory();
                 DefaultOrder order;
                 int seed;
+                //Revisit wasn't clicked, must store new maze and settings
                 if(revisited==false){
                     Random rand=new Random();
                     seed= rand.nextInt(10000);
                     saveDataInSharedPreferences(seed,Integer.valueOf(diff[0]), rooms[0], Alg[0]);
+
                 }
                 else{
+                    //revisit was clicked, must get maze settings from shared preferences
                     seed=readDataFromSharedPreferencesseed();
                     diff[0] =readDataFromSharedPreferencessize();
                     rooms[0] =readDataFromSharedPreferencesRooms();
                     Alg[0] =readDataFromSharedPreferencesALG();
+                    Log.v("Maze setting recovered","Maze settings recovered from last play using shared preferences");
 
                 }
                 if(Alg[0].equals("DFS")){
@@ -197,9 +201,9 @@ public class GeneratingActivity extends AppCompatActivity {
                         order=new DefaultOrder(Integer.valueOf(diff[0]), Order.Builder.Boruvka,true,seed);
                     }
                 }
-
+                //generate the maze
                 factory.order(order);
-
+                //Update progress bar
                 while(progressstatus<100){
                     progressstatus=order.getProgress();
                     android.os.SystemClock.sleep(100);
@@ -212,7 +216,15 @@ public class GeneratingActivity extends AppCompatActivity {
                     });
 
                 }
+                //get the maze
                 maze=order.getMaze();
+                if(maze!=null){
+                    Log.v("Maze acquired","Maze acruied from factory");
+
+                }
+                else{
+                    Log.e("Maze null","maze is null");
+                }
 
 
                 /**
@@ -256,6 +268,14 @@ public class GeneratingActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Saves the various parameters using sharedpreferences so that they can be accessed if revisit
+     * button is clicked
+     * @param mazeseed seed to be saved
+     * @param size size to be saved
+     * @param perfect whether the saved maze is perfect
+     * @param algor Algorithm used to build maze
+     */
     private void saveDataInSharedPreferences(int mazeseed, int size, String perfect,String algor) {
         SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
         SharedPreferences.Editor myedit= sharedPreferences.edit();
@@ -266,24 +286,42 @@ public class GeneratingActivity extends AppCompatActivity {
         myedit.putString("Algorithm",algor);
         myedit.commit();
     }
+
+    /**
+     * Gets seed of previous maze from shared preferences
+     * @return seed saved in shared preferences
+     */
     private int readDataFromSharedPreferencesseed(){
         Random rand=new Random();
         SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
         int mazeseed=sharedPreferences.getInt("Seed",rand.nextInt(10000));
         return mazeseed;
     }
+    /**
+     * Gets size of previous maze from shared preferences
+     * @return size saved in shared preferences
+     */
     private int readDataFromSharedPreferencessize(){
         Random rand=new Random();
         SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
         int mazesize=sharedPreferences.getInt("Size",rand.nextInt(10));
         return mazesize;
     }
+
+    /**
+     * Gets algorithm used to build previous maze from shared preferences
+     * @return algorithm saved in shared preferences
+     */
     private String readDataFromSharedPreferencesALG(){
         SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
         String alg=sharedPreferences.getString("Algorithm","Prim");
         return alg;
 
     }
+    /**
+     * Gets whether the previous maze was perfect
+     * @return rooms saved in shared preferences
+     */
     private String readDataFromSharedPreferencesRooms(){
         SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
         String rooms=sharedPreferences.getString("Perfect","rooms");
@@ -295,25 +333,30 @@ public class GeneratingActivity extends AppCompatActivity {
      */
     private void changeActivity(){
         Intent intent=new Intent(this, AMazeActivity.class);
+        Log.v("Change activity","Activity changed to title");
         startActivity(intent);
     }
 
     /**
      * Changes Activity to playmanually
+     * also passes maze to play manual
      */
 
     private void changeActivitytomanual(){
         Intent intent=new Intent(this, PlayManuallyActivity.class);
         PlayManuallyActivity.maze=maze;
+        Log.v("Change activity","Activity changed to playmanually");
         startActivity(intent);
     }
 
     /**
      * Changes Activity to playanimation
+     * also passes maze to play animation
      */
     private void changeActivitytoanimation(){
         Intent intent=new Intent(this, PlayAnimationActivity.class);
         PlayAnimationActivity.maze=maze;
+        Log.v("Change activity","Activity changed to playanimation");
         startActivity(intent);
     }
 }

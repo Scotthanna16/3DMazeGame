@@ -1,5 +1,7 @@
 package edu.wm.cs.cs301.ScottHanna.generation;
 
+import android.util.Log;
+
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -78,7 +80,7 @@ public final class SingleRandom {
 	 */
 	public static void setSeed(final int seed) {
 		if (null != instance) {
-			LOGGER.config("SingleRandom already instantiated, setting new seed value " + seed + "will start different RN stream");
+			Log.v("seed set","SingleRandom already instantiated, setting new seed value " + seed + "will start different RN stream");
 			instance.generator.setSeed(seed) ;
 		}
 		theSeed = seed;

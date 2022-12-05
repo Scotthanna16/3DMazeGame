@@ -32,7 +32,7 @@ public class WinningActivity extends AppCompatActivity {
         Bundle extras=getIntent().getExtras();
         String pathlength=extras.getString("Pathlength");
         String energyconsumption= extras.getString("EnergyConsumption");
-        //If the path length is 0, then don't show the path length text because manual
+        //If the energy consumption is 0, then don't show the path length text because manual
         //must have been played
         if(Integer.valueOf(pathlength)!=0){
             view=(TextView)findViewById(R.id.Pathlength);
@@ -71,6 +71,7 @@ public class WinningActivity extends AppCompatActivity {
      */
     private void changeActivity(){
         Intent intent=new Intent(this, AMazeActivity.class);
+        Log.v("Change Activity","Player has exited the maze");
         startActivity(intent);
     }
 }

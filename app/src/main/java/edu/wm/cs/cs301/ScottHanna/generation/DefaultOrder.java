@@ -5,6 +5,7 @@ package edu.wm.cs.cs301.ScottHanna.generation;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import android.util.Log;
 
 import edu.wm.cs.cs301.ScottHanna.gui.Constants;
 
@@ -173,7 +174,7 @@ public class DefaultOrder implements Order {
     	this.seed = seed;
     	this.maze = maze;
     	this.progress = progress; // do not use updateProgress method, subject to override in subclasses!
-    	LOGGER.fine("Constructor asks for maze of size " + skillLevel 
+    	Log.v("Order settings","Constructor asks for maze of size " + skillLevel
     			+ ", algorithm " + builder 
     			+ ", perfect? " + perfectMaze 
     			+ ", seed " + seed 
@@ -187,7 +188,7 @@ public class DefaultOrder implements Order {
 	 */
 	@Override
 	public int getSkillLevel() {
-		LOGGER.fine("provide skill level info: " + skillLevel);
+		Log.v("get skill level","provide skill level info: " + skillLevel);
 		return skillLevel;
 	}
 	/**
@@ -195,7 +196,7 @@ public class DefaultOrder implements Order {
 	 * @param skillLevel the size of the maze, {@literal 0 <= skillLevel <= 15}
 	 */
 	public void setSkillLevel(int skillLevel) {
-		LOGGER.fine("receive skill level info: " + skillLevel);
+		Log.v("set skill level","receive skill level info: " + skillLevel);
 		// Note: skillLevel is used as an index for arrays such as Constants.SKILL_X.
 		// These arrays only support 0,1, ..., 15. 
 		if (0 <= skillLevel && skillLevel <= Constants.MAX_SKILL_LEVEL) {
@@ -203,7 +204,7 @@ public class DefaultOrder implements Order {
 		}
 		else {
 			this.skillLevel = 0; // set to a default value
-			LOGGER.severe("range violation, " + skillLevel + " outside 0,1,...,15 range. Use 0 as default instead.");
+			Log.w("Skill level violation","range violation, " + skillLevel + " outside 0,1,...,15 range. Use 0 as default instead.");
 		}
 			
 	}
@@ -213,7 +214,7 @@ public class DefaultOrder implements Order {
 	 */
 	@Override
 	public Builder getBuilder() {
-		LOGGER.fine("provide builder info: " + builder);
+		Log.v("get builder","provide builder info: " + builder);
 		return builder;
 	}
 	/**
@@ -221,7 +222,7 @@ public class DefaultOrder implements Order {
 	 * @param builder the algorithm to be used by the MazeFactory
 	 */
 	public void setBuilder(Builder builder) {
-		LOGGER.fine("receive builder info: " + builder);
+		Log.v("set builder","receive builder info: " + builder);
 		this.builder = builder;
 	}
 
@@ -230,7 +231,7 @@ public class DefaultOrder implements Order {
 	 */
 	@Override
 	public boolean isPerfect() {
-		LOGGER.fine("provide info about the maze being perfect, maze is perfect? " + perfectMaze);
+		Log.v("Maze perfect?","provide info about the maze being perfect, maze is perfect? " + perfectMaze);
 		return perfectMaze;
 	}
 	/**
@@ -238,7 +239,7 @@ public class DefaultOrder implements Order {
 	 * @param perfectMaze if true the maze should be perfect and have no rooms, otherwise rooms are allowed and circles can be present in the maze.
 	 */
 	public void setPerfect(boolean perfectMaze) {
-		LOGGER.fine("receive info about the maze being perfect, maze is perfect? " + perfectMaze);
+		Log.v("perfect set","receive info about the maze being perfect, maze is perfect? " + perfectMaze);
 		this.perfectMaze = perfectMaze;
 	}
 
@@ -247,7 +248,7 @@ public class DefaultOrder implements Order {
 	 * @param seed the seed for the random number generation
 	 */
 	public void setSeed(int seed) {
-		LOGGER.fine("receive info about seed for random number generation: " + seed);
+		Log.v("seed set","receive info about seed for random number generation: " + seed);
 		this.seed = seed;
 	}
 	/**
@@ -255,7 +256,7 @@ public class DefaultOrder implements Order {
 	 */
 	@Override
 	public int getSeed() {
-		LOGGER.fine("provide info about seed for random number generation: " + seed);
+		Log.v("seed fetched","provide info about seed for random number generation: " + seed);
 		return seed;
 	}
 
@@ -274,7 +275,7 @@ public class DefaultOrder implements Order {
 	 */
 	@Override
 	public void deliver(Maze maze) {
-		LOGGER.fine("receive reference to generated maze: " + maze);
+		Log.v("Reference to maze","receive reference to generated maze: " + maze);
 		this.maze = maze;
 
 	}
@@ -283,7 +284,7 @@ public class DefaultOrder implements Order {
 	 * @return the current level of progress that has been made so far, {@literal 0 <= value <= 100}
 	 */
 	public int getProgress() {
-		LOGGER.fine("provide info about progress (completion of maze generation): " + progress);
+		Log.v("Generation progress","receive info about progress (completion of maze generation): " + progress);
 		return progress;
 	}
 	/**
@@ -292,13 +293,13 @@ public class DefaultOrder implements Order {
 	 */
 	@Override
 	public void updateProgress(int percentage) {
-		LOGGER.fine("receive info about progress (completion of maze generation): " + percentage);
+		Log.v("Generation progress","receive info about progress (completion of maze generation): " + percentage);
 		if (0 <= percentage && percentage <= 100) {
 			progress = percentage;
 		}
 		else {
 			progress = (percentage < 0) ? 0 : 100;
-			LOGGER.severe("range violation, " + percentage + " outside 0,1,...,100 range. Used closest legit value for mitigation.");
+			Log.w("Progress > 100","range violation, " + percentage + " outside 0,1,...,100 range. Used closest legit value for mitigation.");
 		}
 	}
 

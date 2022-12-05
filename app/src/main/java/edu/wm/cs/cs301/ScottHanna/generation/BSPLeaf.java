@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import android.util.Log;
 
 import edu.wm.cs.cs301.ScottHanna.gui.MazeFileWriter;
 
@@ -74,7 +75,7 @@ public class BSPLeaf extends BSPNode {
 	public int store(Document doc, Element mazeXML, int number) {
 		super.store(doc, mazeXML, number) ; //leaves number unchanged
 		if (!isIsleaf())
-			LOGGER.warning("Node does not carry isleaf flag but is a BSPLeaf, this is inconsistent!");
+			Log.w("Inconsistent node","Node does not carry isleaf flag but is a BSPLeaf, this is inconsistent!");
 		// store list of walls, store total number of elements first
 		MazeFileWriter.appendChild(doc, mazeXML, "numSeg_" + number, allWalls.size()) ;
 		int i = 0 ;

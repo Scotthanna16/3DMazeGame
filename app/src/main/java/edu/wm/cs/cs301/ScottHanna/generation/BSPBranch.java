@@ -3,6 +3,8 @@
  */
 package edu.wm.cs.cs301.ScottHanna.generation;
 
+import android.util.Log;
+
 import java.util.logging.Logger;
 
 import org.w3c.dom.Document;
@@ -122,7 +124,7 @@ public class BSPBranch extends BSPNode {
 	public int store(Document doc, Element mazeXML, int number) {
 		super.store(doc, mazeXML, number) ; //leaves number unchanged
 		if (isIsleaf())
-			LOGGER.warning("Node carries isleaf flag but is a BSPNode, this is inconsistent!");
+			Log.w("inconsistent node","Node carries isleaf flag but is a BSPNode, this is inconsistent!");
 		// store: x, y, dx, dy
 		MazeFileWriter.appendChild(doc, mazeXML, "xBSPNode_" + number, getX()) ;
 		MazeFileWriter.appendChild(doc, mazeXML, "yBSPNode_" + number, getY()) ;
