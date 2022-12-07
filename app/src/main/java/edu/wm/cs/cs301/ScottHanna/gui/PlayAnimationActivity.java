@@ -1,6 +1,7 @@
 package edu.wm.cs.cs301.ScottHanna.gui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -17,6 +18,7 @@ import edu.wm.cs.cs301.ScottHanna.R;
 import edu.wm.cs.cs301.ScottHanna.generation.CardinalDirection;
 import edu.wm.cs.cs301.ScottHanna.generation.Floorplan;
 import edu.wm.cs.cs301.ScottHanna.generation.Maze;
+import edu.wm.cs.cs301.ScottHanna.generation.Wall;
 
 public class PlayAnimationActivity extends AppCompatActivity {
     private Button backbutton;
@@ -31,6 +33,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private Button Pause;
     SeekBar seekbar;
     TextView view;
+    TextView Forward;
+    TextView Left;
+    TextView Right;
+    TextView Back;
     public static Maze maze;
     private int px=0;
     private int py=0;
@@ -42,6 +48,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private boolean mapMode=false;
     private Floorplan seenCells;
     private Map mapView;
+
 
 
     private ProgressBar pbar;
@@ -58,10 +65,54 @@ public class PlayAnimationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playanimationscreen);
+        // adjust internal state of maze model
+        // init data structure for visible walls
         panel=findViewById(R.id.mazePanel3);
+        seenCells = new Floorplan(maze.getWidth()+1,maze.getHeight()+1) ;
+        // set the current position and direction consistently with the viewing direction
+        setPositionDirectionViewingDirection();
+
+        if (panel != null) {
+            startDrawer();
+
+        }
         Bundle extras=getIntent().getExtras();
-        String robotstr= extras.getString("Robot type");
+        Forward=findViewById(R.id.Forward);
+        Left=findViewById(R.id.Left);
+        Right=findViewById(R.id.Right);
+        Back=findViewById(R.id.Backward);
+
+
+
+
         String driverstr=extras.getString("Driver type");
+        if(driverstr=="Wall Follower"){
+            driver=new WallFollower();
+            String robotstr= extras.getString("Robot type");
+            if(robotstr=="Premium"){
+                robot=new ReliableRobot();
+                Forward.setTextColor(Color.GREEN);
+                Right.setTextColor(Color.GREEN);
+                Left.setTextColor(Color.GREEN);
+                Back.setTextColor(Color.GREEN);
+            }
+            else{
+                robot=new UnreliableRobot();
+            }
+        }
+        else{
+            driver=new Wizard();
+            robot=new ReliableRobot();
+            robot.setController(this);
+            driver.setRobot(robot);
+            driver.setMaze(maze);
+            Forward.setTextColor(Color.GREEN);
+            Right.setTextColor(Color.GREEN);
+            Left.setTextColor(Color.GREEN);
+            Back.setTextColor(Color.GREEN);
+        }
+
+
 
 
         //Initializes Back Button
@@ -236,6 +287,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 Log.v("Animation_Speed_Changed","Changed to"+String.valueOf(i));
                 //changes text about seekbar
                 view.setText("Speed"+String.valueOf(i));
+
             }
 
             @Override
@@ -260,7 +312,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
              */
             public void run() {
                 //max energy consumption 3500
-                while(progressstatus<3500){
+                try {
+                    driver.drive2Exit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                while(progressstatus>3500){
                     //increments progress bar
                     progressstatus+=1;
                     android.os.SystemClock.sleep(5);
@@ -506,7 +563,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
         Log.v("used to slow draw","Drawing intermediate figures: angle " + angle + ", walkStep " + walkStep);
         draw(angle, walkStep) ;
         try {
-            Thread.sleep(25);
+            Thread.sleep(50);
         } catch (Exception e) {
             // may happen if thread is interrupted
             // no reason to do anything about it, ignore exception
@@ -564,6 +621,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
         setCurrentPosition(px + dir*tmpDxDy[0], py + dir*tmpDxDy[1]) ;
         // logPosition(); // debugging
         drawHintIfNecessary();
+
     }
 
     /**
@@ -615,6 +673,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         int[] start = maze.getStartingPosition() ;
         setCurrentPosition(start[0],start[1]) ;
         cd = CardinalDirection.East;
+    }
+
+    public void updatePanel(){
+        panel.commit();
     }
 
 

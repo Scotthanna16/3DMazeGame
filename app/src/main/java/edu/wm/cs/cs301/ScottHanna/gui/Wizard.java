@@ -220,6 +220,7 @@ public class Wizard implements RobotDriver{
 	 */
 	@Override
 	public boolean drive1Step2Exit() throws Exception {
+
 		//Moves robot 
 		robot.move(1);
 		if(robot.hasStopped()==true) {

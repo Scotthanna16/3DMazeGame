@@ -119,12 +119,13 @@
     <TextView
         android:id="@+id/Speed"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:gravity="center"
 
         android:text="Speed 50"
         android:textColor="@color/black"
         android:textSize="50sp" />
+
 
     <SeekBar
         android:id="@+id/Seekbarid"
@@ -132,15 +133,13 @@
         android:layout_height="wrap_content"
 
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="104dp"
-        android:scaleX="2"
-        android:scaleY="2"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="96dp"
         android:max="100"
         android:progress="50"
-        android:thumbTint="@color/black"/>
-
-
+        android:scaleX="2"
+        android:scaleY="2"
+        android:thumbTint="@color/black" />
 
     <ProgressBar
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"

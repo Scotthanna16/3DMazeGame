@@ -211,6 +211,9 @@ public class ReliableRobot implements Robot{
 	public void setOdometer(int x) {
 		odometerreading=x;
 	}
+	public PlayAnimationActivity getController(){
+		return controller;
+	}
 	
 	
 	/**

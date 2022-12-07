@@ -519,6 +519,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         setCurrentPosition(px + dir*tmpDxDy[0], py + dir*tmpDxDy[1]) ;
        // logPosition(); // debugging
         drawHintIfNecessary();
+
     }
 
     /**

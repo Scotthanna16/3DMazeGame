@@ -317,6 +317,7 @@ public interface Robot {
 	 * @param sensor
 	 */
 	public void stopsensor(DistanceSensor sensor);
+	public PlayAnimationActivity getController();
 	
 	
 }
