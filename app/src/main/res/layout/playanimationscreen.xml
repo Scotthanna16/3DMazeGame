@@ -166,7 +166,7 @@
         android:visibility="invisible"
         />
 
-    <edu.wm.cs.cs301.ScottHanna.gui.MazePanel2
+    <edu.wm.cs.cs301.ScottHanna.gui.MazePanel
         android:id="@+id/mazePanel3"
         android:layout_width="339dp"
         android:layout_height="339dp"

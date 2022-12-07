@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -29,19 +30,29 @@ import edu.wm.cs.cs301.ScottHanna.R;
 import edu.wm.cs.cs301.ScottHanna.generation.DefaultOrder;
 import edu.wm.cs.cs301.ScottHanna.generation.MazeFactory;
 import edu.wm.cs.cs301.ScottHanna.generation.Order;
+import edu.wm.cs.cs301.ScottHanna.gui.Robot;
+import edu.wm.cs.cs301.ScottHanna.gui.RobotDriver;
 
 public class GeneratingActivity extends AppCompatActivity {
     private Button backbutton;
-    String[]Driver={"Manual","Wall Follower", "Wizard"};
+    String[]Driver={"None","Manual","Wall Follower", "Wizard"};
     String[]Reliability={"Premium","Mediocore","Soso","Shaky"};
 
     private ProgressBar pbar;
     private TextView tv;
+    private TextView text;
     private int progressstatus=0;
     private Handler handler=new Handler();
     private boolean drivermanual=false;
     private static Maze maze;
     private SharedPreferences seed;
+    private String Robotstr;
+    private String Driverstr;
+
+    private boolean driverselected=false;
+    private boolean robotselected=false;
+
+    private int count=0;
 
 
 
@@ -59,7 +70,9 @@ public class GeneratingActivity extends AppCompatActivity {
         final String[] rooms = {extras.getString("Rooms")};
         final String[] Alg = {extras.getString("Algorithm")};
         int[] diff = {extras.getInt("Difficulty")};
-        Boolean revisited=extras.getBoolean("revisitclicked");
+        boolean revisited=extras.getBoolean("revisitclicked");
+
+
 
 
         //Initializes spinner for driver choice
@@ -81,14 +94,26 @@ public class GeneratingActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast and LogV message when spinner changes
+
+
+
                 Toast.makeText(GeneratingActivity.this,Driver[i],Toast.LENGTH_LONG).show();
                 Log.v("Driver_Selected","Driver Selected: "+Driver[i]);
                 //Controls boolean so that we can switch to correct screen
                 if(Driver[i]=="Manual"){
+                    driverselected=true;
                     drivermanual=true;
                 }
-                else{
+                else if(Driver[i]=="Wizard"||Driver[i]=="Wall Follower"){
+                    driverselected=true;
                     drivermanual=false;
+                    if(Driver[i]=="Wizard"){
+                        Driverstr="Wizard";
+                    }
+                   else {
+                        Driverstr = "Wall Follower";
+                    }
+
                 }
             }
 
@@ -102,8 +127,9 @@ public class GeneratingActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
                 //Toast and LogV message when spinner doesn't change
                 Toast.makeText(GeneratingActivity.this,Driver[0],Toast.LENGTH_LONG).show();
-                Log.v("Driver_Selected","Driver Selected: "+Driver[0]);
+                Log.v("Driver_Selected","No Driver Selected: "+Driver[0]);
                 drivermanual=true;
+
 
 
             }
@@ -129,7 +155,25 @@ public class GeneratingActivity extends AppCompatActivity {
                 //Toast and LogV message when spinner changes
                 Toast.makeText(GeneratingActivity.this,Reliability[i],Toast.LENGTH_LONG).show();
 
+
                 Log.v("Robot_Selected","Robot Selected: "+Reliability[i]);
+                //"Premium","Mediocore","Soso","Shaky"};
+                if(Reliability[i]=="Premium"){
+                    Robotstr="Premium";
+                }
+                else if(Reliability[i]=="Mediocore"){
+                    Robotstr="Mediocore";
+
+                }
+                else if(Reliability[i]=="Soso"){
+                    Robotstr="Soso";
+
+                }
+                else if(Reliability[i]=="Shaky"){
+                    Robotstr="Shaky";
+                }
+
+
 
             }
 
@@ -149,6 +193,7 @@ public class GeneratingActivity extends AppCompatActivity {
         pbar=(ProgressBar)findViewById(R.id.ProgressBar) ;
         //Initializes loading text view
         tv=(TextView)findViewById(R.id.loading);
+        text=findViewById(R.id.noselection);
 
         //new thread to increment loading
         new Thread(new Runnable() {
@@ -218,6 +263,7 @@ public class GeneratingActivity extends AppCompatActivity {
                 }
                 //get the maze
                 maze=order.getMaze();
+
                 if(maze!=null){
                     Log.v("Maze acquired","Maze acruied from factory");
 
@@ -227,16 +273,26 @@ public class GeneratingActivity extends AppCompatActivity {
                 }
 
 
+
+
                 /**
                  * Once progress bar at max, show text and switch screen
                  */
+
+
+
+
+
+
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
 
+
                         //sets text to visible once loading is complete
                         tv.setVisibility(View.VISIBLE);
                         if(drivermanual==true){
+
                             changeActivitytomanual();
                         }
                         else{
@@ -247,6 +303,7 @@ public class GeneratingActivity extends AppCompatActivity {
                 });
             }
         }).start();
+
         //initializes back button
         backbutton=findViewById(R.id.backbutton);
         //listens for click on back button
@@ -343,10 +400,12 @@ public class GeneratingActivity extends AppCompatActivity {
      */
 
     private void changeActivitytomanual(){
-        Intent intent=new Intent(this, PlayManuallyActivity.class);
-        PlayManuallyActivity.maze=maze;
-        Log.v("Change activity","Activity changed to playmanually");
-        startActivity(intent);
+
+            Intent intent=new Intent(this, PlayManuallyActivity.class);
+            PlayManuallyActivity.maze=maze;
+            Log.v("Change activity","Activity changed to playmanually");
+            startActivity(intent);
+
     }
 
     /**
@@ -354,9 +413,18 @@ public class GeneratingActivity extends AppCompatActivity {
      * also passes maze to play animation
      */
     private void changeActivitytoanimation(){
-        Intent intent=new Intent(this, PlayAnimationActivity.class);
-        PlayAnimationActivity.maze=maze;
-        Log.v("Change activity","Activity changed to playanimation");
-        startActivity(intent);
+
+            Intent intent=new Intent(this, PlayAnimationActivity.class);
+            PlayAnimationActivity.maze=maze;
+            intent.putExtra("Robot type",Robotstr);
+            intent.putExtra("Driver type",Driverstr);
+
+            Log.v("Change activity","Activity changed to playanimation");
+            startActivity(intent);
+
+
+
     }
+
+
 }

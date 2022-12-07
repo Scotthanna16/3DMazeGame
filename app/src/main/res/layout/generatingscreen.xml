@@ -75,4 +75,18 @@
         android:textSize="30dp"
         android:visibility="invisible"
         />
+
+    <TextView
+        android:id="@+id/noselection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:layout_below="@+id/Message"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+
+        android:visibility="invisible"
+        android:text="Please choose Robot type and Driver type" />
 </RelativeLayout>
