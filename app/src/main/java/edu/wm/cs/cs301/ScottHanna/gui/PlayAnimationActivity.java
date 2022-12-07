@@ -48,6 +48,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private boolean mapMode=false;
     private Floorplan seenCells;
     private Map mapView;
+    private int animationspeed=50;
 
 
 
@@ -287,6 +288,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 Log.v("Animation_Speed_Changed","Changed to"+String.valueOf(i));
                 //changes text about seekbar
                 view.setText("Speed"+String.valueOf(i));
+                animationspeed=i;
 
             }
 
@@ -313,7 +315,14 @@ public class PlayAnimationActivity extends AppCompatActivity {
             public void run() {
                 //max energy consumption 3500
                 try {
-                    driver.drive2Exit();
+                    if(driver.drive2Exit()==true){
+                        changeActivitytowinning();
+
+                    }
+                    else{
+                        changeActivitytolosing();
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -333,6 +342,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 /**
                  * shows text when out of energy
                  */
+                /*
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -342,7 +352,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                         changeActivitytolosing();
 
                     }
-                });
+                });*/
             }
         }).start();
 
@@ -362,8 +372,8 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
 
         Intent intent=new Intent(this, WinningActivity.class);
-        intent.putExtra("Pathlength",String.valueOf(50));
-        intent.putExtra("EnergyConsumption",String.valueOf(50));
+        intent.putExtra("Pathlength",String.valueOf(robot.getOdometerReading()));
+        intent.putExtra("EnergyConsumption",String.valueOf(robot.getBatteryLevel()));
         startActivity(intent);
     }
     /**
@@ -563,7 +573,8 @@ public class PlayAnimationActivity extends AppCompatActivity {
         Log.v("used to slow draw","Drawing intermediate figures: angle " + angle + ", walkStep " + walkStep);
         draw(angle, walkStep) ;
         try {
-            Thread.sleep(50);
+
+            Thread.sleep(50*(50/animationspeed));
         } catch (Exception e) {
             // may happen if thread is interrupted
             // no reason to do anything about it, ignore exception
@@ -675,9 +686,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
         cd = CardinalDirection.East;
     }
 
-    public void updatePanel(){
-        panel.commit();
-    }
+
 
 
 }

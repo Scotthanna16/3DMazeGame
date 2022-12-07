@@ -31,19 +31,21 @@ public class WinningActivity extends AppCompatActivity {
         //Gets path length and energy consumption for play classes
         Bundle extras=getIntent().getExtras();
         String pathlength=extras.getString("Pathlength");
+        int pl=Integer.valueOf(pathlength);
         String energyconsumption= extras.getString("EnergyConsumption");
+        float ec=3500-Float.valueOf(energyconsumption);
         //If the energy consumption is 0, then don't show the path length text because manual
         //must have been played
-        if(Integer.valueOf(pathlength)!=0){
+        if(pl!=0){
             view=(TextView)findViewById(R.id.Pathlength);
             view.setText("Path Length:"+pathlength);
             view.setVisibility(View.VISIBLE);
 
         }
-        if (Integer.valueOf(energyconsumption)!=0){
+        if (ec!=0){
             view2=(TextView)findViewById(R.id.EnergyConsumption);
 
-            view2.setText("Energy Consumption:"+energyconsumption);
+            view2.setText("Energy Consumption:"+String.valueOf(ec));
 
             view2.setVisibility(View.VISIBLE);
         }

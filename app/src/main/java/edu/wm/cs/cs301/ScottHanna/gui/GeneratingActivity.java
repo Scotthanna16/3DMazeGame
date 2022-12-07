@@ -36,7 +36,7 @@ import edu.wm.cs.cs301.ScottHanna.gui.RobotDriver;
 public class GeneratingActivity extends AppCompatActivity {
     private Button backbutton;
     String[]Driver={"None","Manual","Wall Follower", "Wizard"};
-    String[]Reliability={"Premium","Mediocore","Soso","Shaky"};
+    String[]Reliability={"None","Premium","Mediocore","Soso","Shaky"};
 
     private ProgressBar pbar;
     private TextView tv;
@@ -46,8 +46,9 @@ public class GeneratingActivity extends AppCompatActivity {
     private boolean drivermanual=false;
     private static Maze maze;
     private SharedPreferences seed;
-    private String Robotstr;
-    private String Driverstr;
+    private String Robotstr="None";
+    private String Driverstr="None";
+    private boolean mazeacquired=false;
 
     private boolean driverselected=false;
     private boolean robotselected=false;
@@ -103,6 +104,7 @@ public class GeneratingActivity extends AppCompatActivity {
                 if(Driver[i]=="Manual"){
                     driverselected=true;
                     drivermanual=true;
+                    Driverstr="Manual";
                 }
                 else if(Driver[i]=="Wizard"||Driver[i]=="Wall Follower"){
                     driverselected=true;
@@ -115,6 +117,7 @@ public class GeneratingActivity extends AppCompatActivity {
                     }
 
                 }
+                checkifready();
             }
 
 
@@ -172,6 +175,7 @@ public class GeneratingActivity extends AppCompatActivity {
                 else if(Reliability[i]=="Shaky"){
                     Robotstr="Shaky";
                 }
+                checkifready();
 
 
 
@@ -266,6 +270,10 @@ public class GeneratingActivity extends AppCompatActivity {
 
                 if(maze!=null){
                     Log.v("Maze acquired","Maze acruied from factory");
+                    mazeacquired=true;
+
+
+
 
                 }
                 else{
@@ -291,13 +299,7 @@ public class GeneratingActivity extends AppCompatActivity {
 
                         //sets text to visible once loading is complete
                         tv.setVisibility(View.VISIBLE);
-                        if(drivermanual==true){
-
-                            changeActivitytomanual();
-                        }
-                        else{
-                            changeActivitytoanimation();
-                        }
+                        checkifready();
 
                     }
                 });
@@ -401,6 +403,7 @@ public class GeneratingActivity extends AppCompatActivity {
 
     private void changeActivitytomanual(){
 
+
             Intent intent=new Intent(this, PlayManuallyActivity.class);
             PlayManuallyActivity.maze=maze;
             Log.v("Change activity","Activity changed to playmanually");
@@ -424,6 +427,20 @@ public class GeneratingActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void checkifready(){
+        if(Driverstr!="None"&&Robotstr!="None"&&mazeacquired==true){
+            if(Driverstr=="Manual"){
+                changeActivitytomanual();
+            }
+            else{
+                changeActivitytoanimation();
+            }
+        }
+        if (mazeacquired){
+            text.setVisibility(View.VISIBLE);
+        }
     }
 
 
