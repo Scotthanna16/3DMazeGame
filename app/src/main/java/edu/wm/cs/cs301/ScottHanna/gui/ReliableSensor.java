@@ -256,7 +256,11 @@ public class ReliableSensor implements DistanceSensor {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	@Override
+	public boolean isworking(){
+		return true;
+	}
 	
 
 }

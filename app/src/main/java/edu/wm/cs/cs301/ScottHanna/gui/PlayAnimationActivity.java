@@ -49,6 +49,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private Floorplan seenCells;
     private Map mapView;
     private int animationspeed=50;
+    private DistanceSensor f;
+    private DistanceSensor r;
+    private DistanceSensor l;
+    private DistanceSensor b;
 
 
 
@@ -110,14 +114,14 @@ public class PlayAnimationActivity extends AppCompatActivity {
             }
             else if (robotstr.equals("Mediocore")){
                 robot=new UnreliableRobot();
-                ReliableSensor f1=new ReliableSensor();
-                ReliableSensor b1=new ReliableSensor();
-                UnreliableSensor l1=new UnreliableSensor();
-                UnreliableSensor r1=new UnreliableSensor();
-                robot.addDistanceSensor(f1, Robot.Direction.FORWARD);
-                robot.addDistanceSensor(l1, Robot.Direction.LEFT);
-                robot.addDistanceSensor(r1, Robot.Direction.RIGHT);
-                robot.addDistanceSensor(b1, Robot.Direction.BACKWARD);
+                f=new ReliableSensor();
+                b=new ReliableSensor();
+                l=new UnreliableSensor();
+                r=new UnreliableSensor();
+                robot.addDistanceSensor(f, Robot.Direction.FORWARD);
+                robot.addDistanceSensor(l, Robot.Direction.LEFT);
+                robot.addDistanceSensor(r, Robot.Direction.RIGHT);
+                robot.addDistanceSensor(b, Robot.Direction.BACKWARD);
                 robot.setController(this);
                 driver.setRobot(robot);
                 driver.setMaze(maze);
@@ -145,14 +149,14 @@ public class PlayAnimationActivity extends AppCompatActivity {
             }
             else if (robotstr.equals("Soso")){
                 robot=new UnreliableRobot();
-                ReliableSensor l2=new ReliableSensor();
-                ReliableSensor r2=new ReliableSensor();
-                UnreliableSensor f2=new UnreliableSensor();
-                UnreliableSensor b2=new UnreliableSensor();
-                robot.addDistanceSensor(f2, Robot.Direction.FORWARD);
-                robot.addDistanceSensor(f2, Robot.Direction.LEFT);
-                robot.addDistanceSensor(r2, Robot.Direction.RIGHT);
-                robot.addDistanceSensor(b2, Robot.Direction.BACKWARD);
+                l=new ReliableSensor();
+                r=new ReliableSensor();
+                f=new UnreliableSensor();
+                b=new UnreliableSensor();
+                robot.addDistanceSensor(f, Robot.Direction.FORWARD);
+                robot.addDistanceSensor(l, Robot.Direction.LEFT);
+                robot.addDistanceSensor(r, Robot.Direction.RIGHT);
+                robot.addDistanceSensor(b, Robot.Direction.BACKWARD);
                 robot.setController(this);
                 driver.setRobot(robot);
                 driver.setMaze(maze);
@@ -179,14 +183,14 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 }}
             else{
                 robot=new UnreliableRobot();
-                UnreliableSensor f3=new UnreliableSensor();
-                UnreliableSensor b3=new UnreliableSensor();
-                UnreliableSensor l3=new UnreliableSensor();
-                UnreliableSensor r3=new UnreliableSensor();
-                    robot.addDistanceSensor(f3, Robot.Direction.FORWARD);
-                    robot.addDistanceSensor(l3, Robot.Direction.LEFT);
-                    robot.addDistanceSensor(r3, Robot.Direction.RIGHT);
-                    robot.addDistanceSensor(b3, Robot.Direction.BACKWARD);
+                f=new UnreliableSensor();
+                b=new UnreliableSensor();
+                l=new UnreliableSensor();
+                r=new UnreliableSensor();
+                    robot.addDistanceSensor(f, Robot.Direction.FORWARD);
+                    robot.addDistanceSensor(l, Robot.Direction.LEFT);
+                    robot.addDistanceSensor(r, Robot.Direction.RIGHT);
+                    robot.addDistanceSensor(b, Robot.Direction.BACKWARD);
                     robot.setController(this);
                     driver.setRobot(robot);
                     driver.setMaze(maze);
@@ -456,6 +460,69 @@ public class PlayAnimationActivity extends AppCompatActivity {
             public void run() {
                 while(driver.getEnergyConsumption()<3500){
                     pbar.setProgress((int) driver.getEnergyConsumption());
+                }
+
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            /**
+             * Increments energy consumption progress bar
+             */
+            public void run() {
+                while(robot.isAtExit()==false){
+                    if(f.isworking()){
+                        if(Forward.getCurrentTextColor()==Color.GREEN){}
+                        else{
+                            Forward.setTextColor(Color.GREEN);
+                        }
+                    }
+                    else{
+                        if(Forward.getCurrentTextColor()==Color.RED){}
+                        else{
+                            Forward.setTextColor(Color.RED);
+                        }
+                    }
+
+                    if(b.isworking()){
+                        if(Back.getCurrentTextColor()==Color.GREEN){}
+                        else{
+                            Back.setTextColor(Color.GREEN);
+                        }
+                    }
+                    else{
+                        if(Back.getCurrentTextColor()==Color.RED){}
+                        else{
+                            Back.setTextColor(Color.RED);
+                        }
+                    }
+
+                    if(l.isworking()){
+                        if(Left.getCurrentTextColor()==Color.GREEN){}
+                        else{
+                            Left.setTextColor(Color.GREEN);
+                        }
+                    }
+                    else{
+                        if(Left.getCurrentTextColor()==Color.RED){}
+                        else{
+                            Left.setTextColor(Color.RED);
+                        }
+                    }
+
+                    if(r.isworking()){
+                        if(Right.getCurrentTextColor()==Color.GREEN){}
+                        else{
+                            Right.setTextColor(Color.GREEN);
+                        }
+                    }
+                    else{
+                        if(Right.getCurrentTextColor()==Color.RED){}
+                        else{
+                            Right.setTextColor(Color.RED);
+                        }
+                    }
                 }
 
             }
@@ -808,6 +875,47 @@ public class PlayAnimationActivity extends AppCompatActivity {
         cd = CardinalDirection.East;
     }
 
+    private void setForwardGreen(){
+        Forward.setTextColor(Color.GREEN);
+
+    }
+
+    private void setBackwardGreen(){
+        Back.setTextColor(Color.GREEN);
+
+
+    }
+
+    private void setLeftGreen(){
+        Left.setTextColor(Color.GREEN);
+
+    }
+
+    private void setRightGreen(){
+        Right.setTextColor(Color.GREEN);
+
+    }
+
+    private void setForwardRed(){
+        Forward.setTextColor(Color.RED);
+
+    }
+
+    private void setBackwardRed(){
+        Back.setTextColor(Color.RED);
+
+
+    }
+
+    private void setLeftRed(){
+        Left.setTextColor(Color.RED);
+
+    }
+
+    private void setRightRed(){
+        Right.setTextColor(Color.RED);
+
+    }
 
 
 

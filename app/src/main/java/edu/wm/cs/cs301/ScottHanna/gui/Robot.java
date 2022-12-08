@@ -320,6 +320,7 @@ public interface Robot {
 	public PlayAnimationActivity getController();
 
 	public void communicatestop();
+	public void communicatesensorissue(DistanceSensor sensor);
 	
 	
 }

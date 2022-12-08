@@ -728,9 +728,14 @@ public class ReliableRobot implements Robot{
 	public void stopsensor(DistanceSensor sensor) {
 		
 	}
-
+	@Override
 	public void communicatestop(){
 		controller.changeActivitytolosing();
 	}
 
+	@Override
+	public void communicatesensorissue(DistanceSensor sensor) {
+
+
+	}
 }

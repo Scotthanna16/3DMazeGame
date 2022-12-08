@@ -161,6 +161,8 @@ public interface DistanceSensor {
 	 * @param count
 	 */
 	public void setcount(int count);
+
+	boolean isworking();
 	
 
 }
