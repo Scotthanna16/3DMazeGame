@@ -321,6 +321,6 @@ public interface Robot {
 
 	public void communicatestop();
 	public void communicatesensorissue(DistanceSensor sensor);
-	
+	public DistanceSensor getsensor(Direction d);
 	
 }

@@ -145,6 +145,10 @@ public class WallFollower implements RobotDriver{
 		//Move while not at exit
 		while(driveexit==true) {
 			CardinalDirection cd=robot.getCurrentDirection();
+			if(robot.hasStopped()==true) {
+
+				throw new Exception("Robot has stopped");
+			}
 			
 			//try to sense, catch exception if there is an exception turn around to right
 			try {

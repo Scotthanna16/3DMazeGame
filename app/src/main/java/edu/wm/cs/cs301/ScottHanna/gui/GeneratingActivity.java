@@ -266,6 +266,7 @@ public class GeneratingActivity extends AppCompatActivity {
 
                 }
                 //get the maze
+                factory.waitTillDelivered();
                 maze=order.getMaze();
 
                 if(maze!=null){

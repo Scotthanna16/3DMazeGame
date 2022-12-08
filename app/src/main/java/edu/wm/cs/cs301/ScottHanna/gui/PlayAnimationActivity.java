@@ -187,13 +187,13 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 b=new UnreliableSensor();
                 l=new UnreliableSensor();
                 r=new UnreliableSensor();
-                    robot.addDistanceSensor(f, Robot.Direction.FORWARD);
-                    robot.addDistanceSensor(l, Robot.Direction.LEFT);
-                    robot.addDistanceSensor(r, Robot.Direction.RIGHT);
-                    robot.addDistanceSensor(b, Robot.Direction.BACKWARD);
-                    robot.setController(this);
-                    driver.setRobot(robot);
-                    driver.setMaze(maze);
+                robot.addDistanceSensor(f, Robot.Direction.FORWARD);
+                robot.addDistanceSensor(l, Robot.Direction.LEFT);
+                robot.addDistanceSensor(r, Robot.Direction.RIGHT);
+                robot.addDistanceSensor(b, Robot.Direction.BACKWARD);
+                robot.setController(this);
+                driver.setRobot(robot);
+                driver.setMaze(maze);
                 try {
                     robot.startFailureAndRepairProcess(Robot.Direction.FORWARD, 4, 2);
 
@@ -471,8 +471,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
              * Increments energy consumption progress bar
              */
             public void run() {
+                if(driver instanceof WallFollower){
                 while(robot.isAtExit()==false){
-                    if(f.isworking()){
+
+                    if(robot.getsensor(Robot.Direction.FORWARD).isworking()){
                         if(Forward.getCurrentTextColor()==Color.GREEN){}
                         else{
                             Forward.setTextColor(Color.GREEN);
@@ -485,7 +487,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                         }
                     }
 
-                    if(b.isworking()){
+                    if(robot.getsensor(Robot.Direction.BACKWARD).isworking()){
                         if(Back.getCurrentTextColor()==Color.GREEN){}
                         else{
                             Back.setTextColor(Color.GREEN);
@@ -498,7 +500,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                         }
                     }
 
-                    if(l.isworking()){
+                    if(robot.getsensor(Robot.Direction.LEFT).isworking()){
                         if(Left.getCurrentTextColor()==Color.GREEN){}
                         else{
                             Left.setTextColor(Color.GREEN);
@@ -511,7 +513,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                         }
                     }
 
-                    if(r.isworking()){
+                    if(robot.getsensor(Robot.Direction.RIGHT).isworking()){
                         if(Right.getCurrentTextColor()==Color.GREEN){}
                         else{
                             Right.setTextColor(Color.GREEN);
@@ -525,7 +527,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                     }
                 }
 
-            }
+            }}
         }).start();
         /*
         while(progressstatus>3500){
