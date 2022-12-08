@@ -349,6 +349,7 @@ public class WallFollower implements RobotDriver{
 		//Moves robot 
 			robot.move(1);
 			if(robot.hasStopped()==true) {
+
 				throw new Exception("Robot has stopped");
 			}
 			int []curpo=robot.getCurrentPosition();

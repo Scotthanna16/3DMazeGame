@@ -419,7 +419,8 @@ public class ReliableRobot implements Robot{
 	public boolean hasStopped() {
 		//checks if robot has stopped
 		if (getBatteryLevel()<=0) {
-			System.out.print("Robot Crashed");
+
+			communicatestop();
 			return true;
 		}
 		return false;
@@ -726,6 +727,10 @@ public class ReliableRobot implements Robot{
 	@Override
 	public void stopsensor(DistanceSensor sensor) {
 		
+	}
+
+	public void communicatestop(){
+		controller.changeActivitytolosing();
 	}
 
 }

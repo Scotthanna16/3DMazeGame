@@ -42,7 +42,7 @@ public class WinningActivity extends AppCompatActivity {
             view.setVisibility(View.VISIBLE);
 
         }
-        if (ec!=0){
+        if (ec!=3500){
             view2=(TextView)findViewById(R.id.EnergyConsumption);
 
             view2.setText("Energy Consumption:"+String.valueOf(ec));

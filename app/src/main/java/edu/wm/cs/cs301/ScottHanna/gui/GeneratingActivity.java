@@ -277,7 +277,8 @@ public class GeneratingActivity extends AppCompatActivity {
 
                 }
                 else{
-                    Log.e("Maze null","maze is null");
+                    Log.e("Maze null","maze is null, not normal please retry");
+
                 }
 
 

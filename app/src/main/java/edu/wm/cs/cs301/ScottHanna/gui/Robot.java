@@ -318,6 +318,8 @@ public interface Robot {
 	 */
 	public void stopsensor(DistanceSensor sensor);
 	public PlayAnimationActivity getController();
+
+	public void communicatestop();
 	
 	
 }

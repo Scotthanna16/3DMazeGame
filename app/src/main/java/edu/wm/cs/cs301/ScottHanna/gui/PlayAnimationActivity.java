@@ -43,9 +43,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private int pathlength=0;
     private MazePanel panel;
     CardinalDirection cd;
-    private boolean showMaze=false;           // toggle switch to show overall maze on screen
-    private boolean showSolution=false;       // toggle switch to show solution in overall maze on screen
-    private boolean mapMode=false;
+    private boolean showMaze=true;           // toggle switch to show overall maze on screen
+    private boolean showSolution=true;       // toggle switch to show solution in overall maze on screen
+    private boolean mapMode=true;
     private Floorplan seenCells;
     private Map mapView;
     private int animationspeed=50;
@@ -87,18 +87,143 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
 
         String driverstr=extras.getString("Driver type");
-        if(driverstr=="Wall Follower"){
+        if(driverstr.equals("Wall Follower")){
             driver=new WallFollower();
             String robotstr= extras.getString("Robot type");
-            if(robotstr=="Premium"){
+            if(robotstr.equals("Premium")){
                 robot=new ReliableRobot();
                 Forward.setTextColor(Color.GREEN);
                 Right.setTextColor(Color.GREEN);
                 Left.setTextColor(Color.GREEN);
                 Back.setTextColor(Color.GREEN);
+                ReliableSensor f=new ReliableSensor();
+                ReliableSensor b=new ReliableSensor();
+                ReliableSensor l=new ReliableSensor();
+                ReliableSensor r=new ReliableSensor();
+                robot.addDistanceSensor(f, Robot.Direction.FORWARD);
+                robot.addDistanceSensor(l, Robot.Direction.LEFT);
+                robot.addDistanceSensor(r, Robot.Direction.RIGHT);
+                robot.addDistanceSensor(b, Robot.Direction.BACKWARD);
+                robot.setController(this);
+                driver.setRobot(robot);
+                driver.setMaze(maze);
             }
+            else if (robotstr.equals("Mediocore")){
+                robot=new UnreliableRobot();
+                ReliableSensor f1=new ReliableSensor();
+                ReliableSensor b1=new ReliableSensor();
+                UnreliableSensor l1=new UnreliableSensor();
+                UnreliableSensor r1=new UnreliableSensor();
+                robot.addDistanceSensor(f1, Robot.Direction.FORWARD);
+                robot.addDistanceSensor(l1, Robot.Direction.LEFT);
+                robot.addDistanceSensor(r1, Robot.Direction.RIGHT);
+                robot.addDistanceSensor(b1, Robot.Direction.BACKWARD);
+                robot.setController(this);
+                driver.setRobot(robot);
+                driver.setMaze(maze);
+                try {
+                    robot.startFailureAndRepairProcess(Robot.Direction.LEFT, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }
+                try {
+                    Thread.sleep(1300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    //start left sensor, if the left sensor is reliable, catch the exception
+                    robot.startFailureAndRepairProcess(Robot.Direction.RIGHT, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }
+            }
+            else if (robotstr.equals("Soso")){
+                robot=new UnreliableRobot();
+                ReliableSensor l2=new ReliableSensor();
+                ReliableSensor r2=new ReliableSensor();
+                UnreliableSensor f2=new UnreliableSensor();
+                UnreliableSensor b2=new UnreliableSensor();
+                robot.addDistanceSensor(f2, Robot.Direction.FORWARD);
+                robot.addDistanceSensor(f2, Robot.Direction.LEFT);
+                robot.addDistanceSensor(r2, Robot.Direction.RIGHT);
+                robot.addDistanceSensor(b2, Robot.Direction.BACKWARD);
+                robot.setController(this);
+                driver.setRobot(robot);
+                driver.setMaze(maze);
+                try {
+                    robot.startFailureAndRepairProcess(Robot.Direction.FORWARD, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }
+                try {
+                    Thread.sleep(1300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    //start left sensor, if the left sensor is reliable, catch the exception
+                    robot.startFailureAndRepairProcess(Robot.Direction.BACKWARD, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }}
             else{
                 robot=new UnreliableRobot();
+                UnreliableSensor f3=new UnreliableSensor();
+                UnreliableSensor b3=new UnreliableSensor();
+                UnreliableSensor l3=new UnreliableSensor();
+                UnreliableSensor r3=new UnreliableSensor();
+                    robot.addDistanceSensor(f3, Robot.Direction.FORWARD);
+                    robot.addDistanceSensor(l3, Robot.Direction.LEFT);
+                    robot.addDistanceSensor(r3, Robot.Direction.RIGHT);
+                    robot.addDistanceSensor(b3, Robot.Direction.BACKWARD);
+                    robot.setController(this);
+                    driver.setRobot(robot);
+                    driver.setMaze(maze);
+                try {
+                    robot.startFailureAndRepairProcess(Robot.Direction.FORWARD, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }
+
+                try {
+                    //start left sensor, if the left sensor is reliable, catch the exception
+                    robot.startFailureAndRepairProcess(Robot.Direction.LEFT, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }
+
+                try {
+                    //start backward sensor, if the backward sensor is reliable, catch the exception
+                    robot.startFailureAndRepairProcess(Robot.Direction.BACKWARD, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }
+
+                try {
+                    //start right sensor, if the right sensor is reliable, catch the exception
+                    robot.startFailureAndRepairProcess(Robot.Direction.RIGHT, 4, 2);
+
+                }
+                catch(Exception e) {
+
+                }
             }
         }
         else{
@@ -246,10 +371,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
              * Listens for click on go2losing button
              */
             public void onClick(View view) {
-                //Toast and LogV message when button is clicked
-                Toast.makeText(PlayAnimationActivity.this,"Losing",Toast.LENGTH_LONG).show();
-                Log.v("Losing","Changed to losing");
-                changeActivitytolosing();
+
 
             }
         });
@@ -263,10 +385,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
              * Listens for click on go2winning button
              */
             public void onClick(View view) {
-                //Toast and LogV message when button is clicked
-                Toast.makeText(PlayAnimationActivity.this,"Winning",Toast.LENGTH_LONG).show();
-                Log.v("Winning","Changed to Winning");
-                changeActivitytowinning();
+
 
             }
         });
@@ -326,7 +445,23 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                while(progressstatus>3500){
+
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            /**
+             * Increments energy consumption progress bar
+             */
+            public void run() {
+                while(driver.getEnergyConsumption()<3500){
+                    pbar.setProgress((int) driver.getEnergyConsumption());
+                }
+
+            }
+        }).start();
+        /*
+        while(progressstatus>3500){
                     //increments progress bar
                     progressstatus+=1;
                     android.os.SystemClock.sleep(5);
@@ -339,22 +474,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
                     });
 
                 }
-                /**
-                 * shows text when out of energy
-                 */
-                /*
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //When out of energy, show out of energy message
-                        tv.setVisibility(View.VISIBLE);
-                        android.os.SystemClock.sleep(2000);
-                        changeActivitytolosing();
 
-                    }
-                });*/
-            }
-        }).start();
+               */
+
 
     }
     /**
@@ -379,7 +501,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     /**
      * changes activity from play animation to losing
      */
-    private void changeActivitytolosing(){
+    public void changeActivitytolosing(){
         Intent intent=new Intent(this, LosingActivity.class);
         startActivity(intent);
     }
