@@ -13,6 +13,7 @@ import edu.wm.cs.cs301.ScottHanna.generation.Maze;
  *
  */
 public interface RobotDriver {
+	public void setlock(boolean pause);
 	
 	/**
 	 * Assigns a robot platform to the driver. 

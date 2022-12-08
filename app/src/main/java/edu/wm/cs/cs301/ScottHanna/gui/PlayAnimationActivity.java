@@ -275,6 +275,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Zoomed in",Toast.LENGTH_LONG).show();
                 Log.v("Increase","View Zoomed in");
+                handleUserInput(Constants.UserInput.ZOOMIN,0);
 
             }
         });
@@ -290,6 +291,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Zoomed out",Toast.LENGTH_LONG).show();
                 Log.v("Decrease","View Zoomed out");
+                handleUserInput(Constants.UserInput.ZOOMOUT,0);
 
             }
         });
@@ -305,6 +307,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Robot Started",Toast.LENGTH_LONG).show();
                 Log.v("Robot_Start","Robot resumes playing");
+                driver.setlock(false);
 
             }
         });
@@ -320,6 +323,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Robot Paused",Toast.LENGTH_LONG).show();
                 Log.v("Robot_Pause","Robot stops playing");
+                driver.setlock(true);
             }
         });
 
@@ -335,6 +339,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Maze Shown",Toast.LENGTH_LONG).show();
                 Log.v("Show_Maze","Maze is being shown to user");
+                handleUserInput(Constants.UserInput.TOGGLEFULLMAP,0);
 
             }
         });
@@ -350,6 +355,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Solution Shown",Toast.LENGTH_LONG).show();
                 Log.v("Show_Solution","Solution is being shown to user");
+                handleUserInput(Constants.UserInput.TOGGLESOLUTION,0);
             }
         });
         //Initializes Show Walls Button
@@ -364,6 +370,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 //Toast and LogV message when button is clicked
                 Toast.makeText(PlayAnimationActivity.this,"Walls Shown",Toast.LENGTH_LONG).show();
                 Log.v("Show_Walls","Walls are being shown to user");
+                handleUserInput(Constants.UserInput.TOGGLELOCALMAP,0);
             }
         });
         //Initializes Go2Losing Button

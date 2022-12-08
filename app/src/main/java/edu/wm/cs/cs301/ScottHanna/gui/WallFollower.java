@@ -149,7 +149,7 @@ public class WallFollower implements RobotDriver{
 
 				throw new Exception("Robot has stopped");
 			}
-			
+
 			//try to sense, catch exception if there is an exception turn around to right
 			try {
 				//checks to see if there is a wall to the left
@@ -176,15 +176,15 @@ public class WallFollower implements RobotDriver{
 							//no wall in front, move forward
 							robot.rotate(Turn.AROUND);
 							drive1Step2Exit();
-						} 
-						
-					} 
+						}
+
+					}
 					}
 				else {
 					robot.rotate(Turn.LEFT);
 					drive1Step2Exit();
 				}
-			
+
 				}
 			//left sensor not working, right sensor must be
 			catch(Exception e) {
@@ -199,7 +199,7 @@ public class WallFollower implements RobotDriver{
 							robot.rotate(Turn.LEFT);
 						}
 						else {
-							//Turn around and move in original direction 
+							//Turn around and move in original direction
 							robot.rotate(Turn.AROUND);
 							drive1Step2Exit();
 						}
@@ -209,19 +209,19 @@ public class WallFollower implements RobotDriver{
 						robot.rotate(Turn.AROUND);
 						if(robot.distanceToObstacle(Direction.FORWARD)==0) {
 							//wall in front of original direction, turn back around and turn right
-							
+
 							robot.rotate(Turn.RIGHT);
 						}
 						else {
 							//no wall in front, move forward
-							
+
 							drive1Step2Exit();
 						}
-						
+
 					}
 					}
-				
-				
+
+
 			}catch(Exception e3) {
 				//Turn around to original direction
 				if(robot.getCurrentDirection().equals(cd)) {}
@@ -231,8 +231,8 @@ public class WallFollower implements RobotDriver{
 				Thread.sleep(3000);
 			}
 				}
-		
-			
+
+
 		}
 		while(robot.isAtExit()) {
 		//make sure robot is facing exit,
@@ -244,7 +244,7 @@ public class WallFollower implements RobotDriver{
 					return true;
 				}
 			}}
-		//if forward sensor fails, turn around 
+		//if forward sensor fails, turn around
 		catch(Exception e) {
 			robot.rotate(Turn.AROUND);
 			try {
@@ -259,7 +259,7 @@ public class WallFollower implements RobotDriver{
 				robot.rotate(Turn.AROUND);
 			}
 			}
-		
+
 		//RIGHT OF ORIGINAL DIRECTION
 		//Turn right and check that direction
 		robot.rotate(Turn.RIGHT);
@@ -271,7 +271,7 @@ public class WallFollower implements RobotDriver{
 					return true;
 				}
 			}}
-		//if forward sensor fails, turn around 
+		//if forward sensor fails, turn around
 		catch(Exception e) {
 			robot.rotate(Turn.AROUND);
 			try {
@@ -297,7 +297,7 @@ public class WallFollower implements RobotDriver{
 					return true;
 				}
 			}}
-		//if forward sensor fails, turn around 
+		//if forward sensor fails, turn around
 		catch(Exception e) {
 			robot.rotate(Turn.AROUND);
 			try {
@@ -322,7 +322,7 @@ public class WallFollower implements RobotDriver{
 					return true;
 				}
 			}}
-		//if forward sensor fails, turn around 
+		//if forward sensor fails, turn around
 		catch(Exception e) {
 			robot.rotate(Turn.AROUND);
 			try {
@@ -339,6 +339,11 @@ public class WallFollower implements RobotDriver{
 
 		return false;
 	}
+
+	private boolean lock=false;
+	public void setlock(boolean pause){
+		lock=pause;
+	}
 	/**
 	 * If there is a wall in front rotate right
 	 * check if the sensor is sleeping using thread.getstate
@@ -350,8 +355,9 @@ public class WallFollower implements RobotDriver{
 	 */
 	@Override
 	public boolean drive1Step2Exit() throws Exception {
-		//Moves robot 
+		//Moves robot
 		robot.move(1);
+
 		if(robot.hasStopped()==true) {
 
 			throw new Exception("Robot has stopped");

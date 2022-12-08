@@ -208,7 +208,11 @@ public class Wizard implements RobotDriver{
 		}
 		return false;
 	}
-	
+
+	private boolean lock=false;
+	public void setlock(boolean pause){
+		lock=pause;
+	}
 	/**
 	 * Uses the robot object to follow the fastest way determined by drive2exit
 	 * At the exit position, it rotates the robot 
@@ -221,89 +225,84 @@ public class Wizard implements RobotDriver{
 	@Override
 	public boolean drive1Step2Exit() throws Exception {
 
-		//Moves robot 
-		robot.move(1);
-		if(robot.hasStopped()==true) {
+		//Moves robot
+		if(lock==false) {
+			robot.move(1);
+			if (robot.hasStopped() == true) {
 
-			throw new Exception("Robot has stopped");
+				throw new Exception("Robot has stopped");
 
 
+			}
+			int[] curpo = robot.getCurrentPosition();
+			CardinalDirection curdir = robot.getCurrentDirection();
+			//Checks if robot is at exit
+			if (floorplan.isExitPosition(curpo[0], curpo[1])) {
+				//If the current direction is north, checks if the robot is already facing the correct direction, if not rotate it
+				if (curdir == CardinalDirection.North) {
+
+					if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.North)) {
+						driveexit = false;
+						return false;
+					} else if ((floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West))) {
+						driveexit = false;
+						robot.rotate(Turn.RIGHT);
+						return false;
+					} else if ((floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.East))) {
+						driveexit = false;
+						robot.rotate(Turn.LEFT);
+						return false;
+					}
+				}
+				//If the current direction is south, checks if the robot is already facing the correct direction, if not rotate it
+				else if (curdir == CardinalDirection.South) {
+					if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.South)) {
+						driveexit = false;
+						return false;
+					} else if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West)) {
+						driveexit = false;
+						robot.rotate(Turn.LEFT);
+						return false;
+					} else if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.East)) {
+						driveexit = false;
+						robot.rotate(Turn.RIGHT);
+						return false;
+					}
+				}
+				//If the current direction is west, checks if the robot is already facing the correct direction, if not rotate it
+				else if (curdir == CardinalDirection.West) {
+					if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West)) {
+						driveexit = false;
+						return false;
+					} else if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.South)) {
+						driveexit = false;
+						robot.rotate(Turn.RIGHT);
+						return false;
+					} else if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.North)) {
+						driveexit = false;
+						robot.rotate(Turn.LEFT);
+						return false;
+					}
+				}
+				//If the current direction is east, checks if the robot is already facing the correct direction, if not rotate it
+				else {
+					if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.East)) {
+						driveexit = false;
+						return false;
+					} else if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.North)) {
+						driveexit = false;
+						robot.rotate(Turn.RIGHT);
+						return false;
+					} else if (floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West)) {
+						driveexit = false;
+						robot.rotate(Turn.LEFT);
+						return false;
+					}
+				}
+			}
+			return true;
 		}
-		int []curpo=robot.getCurrentPosition();
-		CardinalDirection curdir=robot.getCurrentDirection();
-		//Checks if robot is at exit
-		if(floorplan.isExitPosition(curpo[0], curpo[1])) {
-			//If the current direction is north, checks if the robot is already facing the correct direction, if not rotate it
-			if(curdir==CardinalDirection.North) {
-				
-				if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.North)) {
-					driveexit=false;
-					return false;
-				}
-				else if((floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West))) {
-					driveexit=false;
-					robot.rotate(Turn.RIGHT);
-					return false;
-				}
-				else if((floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.East))) {
-					driveexit=false;
-					robot.rotate(Turn.LEFT);
-					return false;
-				}
-			}
-			//If the current direction is south, checks if the robot is already facing the correct direction, if not rotate it
-			else if(curdir==CardinalDirection.South) {
-				if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.South)) {
-					driveexit=false;
-					return false;
-				}
-				else if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West)) {
-					driveexit=false;
-					robot.rotate(Turn.LEFT);
-					return false;
-				}
-				else if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.East)) {
-					driveexit=false;
-					robot.rotate(Turn.RIGHT);
-					return false;
-				}
-			}
-			//If the current direction is west, checks if the robot is already facing the correct direction, if not rotate it
-			else if(curdir==CardinalDirection.West) {
-				if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West)) {
-					driveexit=false;
-					return false;
-				}
-				else if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.South)) {
-					driveexit=false;
-					robot.rotate(Turn.RIGHT);
-					return false;
-				}
-				else if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.North)) {
-					driveexit=false;
-					robot.rotate(Turn.LEFT);
-					return false;
-				}
-			}
-			//If the current direction is east, checks if the robot is already facing the correct direction, if not rotate it
-			else {
-				if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.East)) {
-					driveexit=false;
-					return false;
-				}
-				else if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.North)) {
-					driveexit=false;
-					robot.rotate(Turn.RIGHT);
-					return false;
-				}
-				else if(floorplan.hasNoWall(curpo[0], curpo[1], CardinalDirection.West)) {
-					driveexit=false;
-					robot.rotate(Turn.LEFT);
-					return false;
-				}
-			}
-		}
-		return true;
+		return false;
 	}
 	/**
 	 * subtracts the robots energy level at the end of the journey from 3500
