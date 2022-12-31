@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2"
+    >
+
+    <Button
+        android:id="@+id/Increase"
+        android:layout_above="@+id/Decrease"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/ShowMap"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="00dp"
+        android:text="Increase"
+
+        android:backgroundTint="@color/material_dynamic_neutral60"/>
+
+    <Button
+        android:id="@id/Decrease"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/Solution"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@id/ShowMap"
+        android:backgroundTint="@color/material_dynamic_neutral60"
+        android:text="Decrease"
+        />
+
+    <Button
+        android:id="@id/Solution"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/material_dynamic_neutral60"
+
+        android:text="Solution" />
+
+    <Button
+        android:id="@+id/ShowWall"
+        android:layout_width="90dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/Solution"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/material_dynamic_neutral60"
+        android:text="Walls" />
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:backgroundTint="@color/material_dynamic_neutral60"
+        android:text="BACK"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/ShowMap"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/Solution"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:backgroundTint="@color/material_dynamic_neutral60"
+        android:text="Maze" />
+
+    <Button
+        android:id="@+id/Start"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/Decrease"
+        android:text="Start"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="130dp"
+
+        android:backgroundTint="@color/material_dynamic_neutral60"/>
+
+
+    <Button
+        android:id="@+id/Pause"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:text="Pause"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="70dp"
+        android:layout_toRightOf="@id/Decrease"
+        android:backgroundTint="@color/material_dynamic_neutral60"/>
+
+    <Button
+        android:id="@+id/Winning"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/material_dynamic_neutral60"
+        android:text="Go2Winning"
+
+        android:layout_marginLeft="60dp"
+        android:layout_above="@id/ShowMap"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:id="@+id/Losing"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/material_dynamic_neutral60"
+        android:text="Gp2Losing"
+        android:layout_marginLeft="230dp"
+        android:layout_above="@id/ShowMap"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/Speed"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+
+        android:text="Speed 50"
+        android:textColor="@color/black"
+        android:textSize="50sp" />
+
+
+    <SeekBar
+        android:id="@+id/Seekbarid"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="96dp"
+        android:max="100"
+        android:min="1"
+        android:progress="50"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:thumbTint="@color/black" />
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/EnergyBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Backward"
+        android:layout_marginTop="220dp"
+        android:max="3500"
+        />
+    <TextView
+        android:id="@+id/Outofenergy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Forward"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="95dp"
+
+        android:text="OUT OF ENERGY"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        />
+
+    <edu.wm.cs.cs301.ScottHanna.gui.MazePanel
+        android:id="@+id/mazePanel3"
+        android:layout_width="339dp"
+        android:layout_height="339dp"
+        android:layout_below="@id/backbutton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp" />
+
+    <TextView
+        android:id="@+id/Forward"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/backbutton"
+        android:layout_marginTop="40dp"
+
+        android:gravity="center"
+        android:text="F"
+        android:textColor="#900"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/Backward"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/Winning"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="B"
+        android:textColor="#090"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/Left"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/Winning"
+        android:layout_marginBottom="190dp"
+        android:gravity="left"
+
+        android:text="L"
+
+        android:textColor="#900"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/Right"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/Winning"
+        android:layout_marginBottom="190dp"
+        android:gravity="right"
+
+        android:text="R"
+        android:textColor="#090"
+        android:textSize="40sp" />
+
+</RelativeLayout>

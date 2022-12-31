@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/img_2">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:text="Daedalus's Labyrinth"
+        android:textColor="@color/white"
+        android:textSize="70sp" />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:layout_below="@id/Title"
+        android:text="Rating 0"
+        android:textColor="@color/white"
+        android:textSize="50sp" />
+
+    <SeekBar
+        android:id="@+id/Seekbarid"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="104dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:max="10"
+        android:progress="0"
+        android:thumbTint="@color/black"/>
+
+
+    <Button
+        android:id="@+id/Explore"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="EXPLORE"
+        android:backgroundTint="@color/material_dynamic_neutral50"
+        />
+
+    <Button
+        android:id="@+id/revisit"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="91dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toRightOf="@id/Explore"
+        android:text="REVISIT"
+        android:backgroundTint="@color/material_dynamic_neutral50"/>
+    <Spinner
+        android:id="@+id/Rooms"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_above="@id/Explore"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="30dp"
+        android:backgroundTint="@color/white"
+
+        />
+
+    <Spinner
+        android:id="@+id/Algorithm"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_toRightOf="@id/Rooms"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="91dp"
+        android:layout_above="@id/revisit"
+        android:backgroundTint="@color/white"
+
+        />
+</RelativeLayout>
