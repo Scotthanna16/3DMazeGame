@@ -20,7 +20,7 @@ public class AMazeActivity extends AppCompatActivity{
 
     private Button explore;
     private Button revisit;
-    private String[] Algorithms={"DFS","Prim","Boruvka"};
+    private String[] Algorithms={"DFS","Prim"};
     private String[] rooms={"Rooms","No Rooms"};
     SeekBar seekbar;
     TextView view;
